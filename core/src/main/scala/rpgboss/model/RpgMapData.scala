@@ -13,6 +13,8 @@ import scala.collection.mutable.ArrayBuffer
 import rpgboss.model.resource.RpgMapMetadata
 
 /*
+ * Low-level representation of a game map; import/export methods to CSV files
+ *
  * This class has mutable members.
  *
  * See RpgMap object for an explanation of the data format.

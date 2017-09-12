@@ -31,6 +31,12 @@ import rpgboss.editor.dialog.EventInstanceDialog
 import rpgboss.editor.Internationalized._
 import rpgboss.editor.util.MouseUtil
 
+/**
+  * Panel that shows the detailed game map + its toolbar (for zooming, drawing tools, etc.)
+  * @param projectPanel
+  * @param sm
+  * @param tileSelector
+  */
 class MapEditor(
   projectPanel: ProjectPanel,
   sm: StateMaster,
@@ -100,7 +106,7 @@ class MapEditor(
 
   toolbar.contents += Swing.HStrut(16)
 
-  val toolsButtons = enumButtons(MapViewToolsEnum)(
+  val toolsButtons = enumButtons(MapViewToolsEnum)( // Button behaviour is defined in MapViewTools
       selectedTool,
       selectedTool = _,
       iconPaths = List(
@@ -369,6 +375,7 @@ class MapEditor(
   peer
     .getActionMap.put(getMessage("Delete"), actionDeleteEvent.peer)
 
+  // Show the context menu (right-click) of a map
   def showEventPopupMenu(px: Int, py: Int, xTile: Float, yTile: Float) = {
     viewStateOpt map { vs =>
       val evtSelected = selectedEvtId.isDefined
@@ -419,6 +426,16 @@ class MapEditor(
     }
   }
 
+  /**
+    * Behaviour when clicking on a certain tile of the map
+    * @param e
+    * @param xTile0
+    * @param yTile0
+    * @param vs
+    * @return (onlyCallOnTileChange, dragCallback, dragStopCallback)
+    *
+    * onlyCallOnTileChange = only call the dragCallback if the tile is different
+    */
   override def mousePressed(
     e: MousePressed,
     xTile0: Float,
@@ -436,6 +453,7 @@ class MapEditor(
 
     val button = e.peer.getButton()
 
+    // If the event layer is currently selected
     if (selectedLayer == Evt) {
       updateCursorSq(TileRect(xTile0.toInt, yTile0.toInt))
 
@@ -460,11 +478,14 @@ class MapEditor(
           Some((true, onDrag _, onDragStop _))
         } else None
       } else None
+    // If a regular layer is selected
     } else {
+      // Show the right-click context menu
       if (MouseUtil.isRightClick(e)) {
         updateCursorSq(TileRect(xTile0.toInt, yTile0.toInt))
         showEventPopupMenu(e.point.x, e.point.y, xTile0, yTile0)
         None
+      // On a left-click, edit the map using the currently selected tool
       } else if (button == MouseEvent.BUTTON1) {
         vs.begin()
 

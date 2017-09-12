@@ -15,6 +15,11 @@ import rpgboss.editor.uibase.SwingUtils._
 import rpgboss.lib.ArrayUtils
 import rpgboss.model._
 
+/**
+  * Tileset metadata
+  * Panel can be reached via Resources ... > Tilesets
+  */
+
 object MetadataMode extends RpgEnum {
   val PassabilityHeight = Value("Passability_Height")
   val DirectionalPassability = Value("Directional_Passability")

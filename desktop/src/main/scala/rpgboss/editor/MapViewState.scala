@@ -40,6 +40,7 @@ class MapViewState(val sm: StateMaster, val mapName: String) {
   def map = sm.getMap(mapName).get
   def mapMeta = map.metadata
 
+  // Used to retrieve the image data of the different tiles
   val tileCache = new MapTileCache(sm.assetCache, map)
 
   // Map data in editing, for example while mouse is down.

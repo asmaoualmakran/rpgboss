@@ -14,6 +14,10 @@ trait TileBytesSelector {
   def selectionBytes: Array[Array[Array[Byte]]]
 }
 
+/**
+  * Panel with several tabs, each containing a different tileset
+  * @param sm
+  */
 class TabbedTileSelector(sm: StateMaster)
   extends BoxPanel(Orientation.Horizontal) with SelectsMap {
   val thisSidebar = this

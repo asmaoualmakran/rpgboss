@@ -14,6 +14,11 @@ import rpgboss.editor.uibase.StdDialog
 import rpgboss.model.resource.Resource
 import rpgboss.editor.Internationalized._
 
+/**
+  * Dialog to create new projects
+  * @param owner parent window
+  * @param onSuccess function to call if the dialog is filled in succesfully
+  */
 class NewProjectDialog(owner: Window, onSuccess: Project => Any)
   extends StdDialog(owner, getMessage("New_Project")) {
   val rootChooser = Paths.getRootChooserPanel(() => Unit)

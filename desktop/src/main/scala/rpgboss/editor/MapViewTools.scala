@@ -11,6 +11,10 @@ import rpgboss.model.resource.RpgMap._
 import scala.annotation.tailrec
 import java.awt.Rectangle
 
+/**
+  * A MapViewTool is a tool used to draw tiles on a map (e.g. the pencil tool, rectangle tool, eraser, ...)
+  * Note that a map view tool only needs to update the map data structure; it does not repaint the UI. (MapEditor.mousePressed takes care of this..)
+  */
 trait MapViewTool {
   def name: String
   override def toString = name
@@ -180,6 +184,7 @@ object MapViewTools {
       modifiedRect
     }
 
+  // Draw a single tile
   case object Pencil extends MapViewTool {
     val name = "Pencil"
     def onMouseDown(
@@ -308,12 +313,14 @@ object MapViewTools {
     }
   }
 
+  // Fill a rectangular selection with a tile
   case object Rectangle extends RectLikeTool {
     val name = "Rectangle"
 
     def doesPaint(xi: Int, yi: Int, w: Int, h: Int) = true
   }
 
+  // Fill an elliptical selection with a tile
   case object Ellipse extends RectLikeTool {
     val name = "Ellipse"
 
@@ -462,6 +469,7 @@ object MapViewTools {
     }
   }
 
+  // Erase a single tile
   case object Eraser extends MapViewTool {
     val name = "Eraser"
 

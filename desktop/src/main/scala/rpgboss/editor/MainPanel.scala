@@ -13,6 +13,11 @@ import java.awt.event.KeyEvent
 import java.awt.event.InputEvent
 import com.typesafe.scalalogging.slf4j.LazyLogging
 
+/**
+  * Initially, this panel is the splash screen for creating and opening projects
+  * Once the project is ready, this panel's contents is changed into the editor
+  * @param topWin parent window
+  */
 class MainPanel(val topWin: Frame)
   extends BoxPanel(Orientation.Vertical) 
   with LazyLogging {
@@ -86,8 +91,11 @@ class MainPanel(val topWin: Frame)
       }
     }
   }
-  
 
+  /**
+    * Change the window contents to a project editor panel
+    * @param p
+    */
   def setProject(p: Project) = {
     val sm = new StateMaster(this, p)
     smOpt = Some(sm)

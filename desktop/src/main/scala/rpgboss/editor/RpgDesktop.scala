@@ -8,11 +8,18 @@ import javax.swing.UIManager
 import javax.imageio.ImageIO
 import rpgboss.editor.Internationalized._
 
+/**
+  * Main singleton to start the RpgBoss editor
+  */
 object RpgDesktop
   extends SwingApplication
   with LazyLogging
   with UncaughtExceptionHandler {
 
+  /**
+    * Create the initial GUI for creating/opening projects
+    * @return
+    */
   def top() = new MainFrame {
     minimumSize = new Dimension(600, 400)
     resizable = false
@@ -45,6 +52,11 @@ object RpgDesktop
     uncaughtException(Thread.currentThread(), ex)
   }
 
+  /**
+    * Initialize the GUI
+    * (called by SwingApplication.main)
+    * @param args
+    */
   override def startup(args: Array[String]) = {
     if (System.getProperty("swing.defaultlaf") == null) {
       UIManager.setLookAndFeel(
@@ -63,6 +75,10 @@ object RpgDesktop
     t.visible = true
   }
 
+  /**
+    * Main method to start the RpgBoss editor, or (if command-line arguments are given) start a game
+    * @param args
+    */
   override def main(args: Array[String]) {
     if (args.size >= 2 && args.head == "--player") {
       rpgboss.player.LwjglPlayer.main(args.tail)

@@ -18,12 +18,17 @@ import rpgboss.model.resource._
 import rpgboss.model.event.RpgEvent
 import scalaj.http.Http
 
+/**
+  * Main panel representing the editor of a project
+  * @param mainP
+  * @param sm
+  */
 class ProjectPanel(val mainP: MainPanel, sm: StateMaster)
   extends BorderPanel
   with SelectsMap {
-  val tileSelector = new TabbedTileSelector(sm)
-  val mapSelector = new ProjectPanelMapSelector(sm, this)
-  val mapView = new MapEditor(this, sm, tileSelector)
+  val tileSelector = new TabbedTileSelector(sm) // Tile selector (top-left part of the editor window)
+  val mapSelector = new ProjectPanelMapSelector(sm, this) // Panel to switch between the different maps in a project (bottom-left)
+  val mapView = new MapEditor(this, sm, tileSelector) // The view of the entire game map (right)
 
   val window = mainP.getWindow()
   window.resizable = true
@@ -39,6 +44,7 @@ class ProjectPanel(val mainP: MainPanel, sm: StateMaster)
    */
   var eventOnClipboard: Option[RpgEvent] = None
 
+  // Menu items of the "Project" button (top-left)
   val projMenu = new PopupMenu {
     contents += new MenuItem(mainP.actionNew)
     contents += new MenuItem(mainP.actionOpen)
@@ -51,6 +57,7 @@ class ProjectPanel(val mainP: MainPanel, sm: StateMaster)
     List(tileSelector, mapView).map(_.selectMap(mapOpt))
   }
 
+  // Toolbar at the top
   val topBar = new BoxPanel(Orientation.Horizontal) {
     import rpgboss.editor.dialog._
 

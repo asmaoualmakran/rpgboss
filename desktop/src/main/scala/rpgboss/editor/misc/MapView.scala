@@ -30,6 +30,12 @@ object MapScales extends RpgEnum {
   def default = scale1
 }
 
+/**
+  * Game map view
+  * @param owner
+  * @param sm
+  * @param initialScale
+  */
 class MapView(
   owner: Window,
   sm: StateMaster,
@@ -82,14 +88,19 @@ class MapView(
       }
     }
 
+    /**
+      * Draws the currently visible portion of the map
+      * @param g
+      */
     override def paintComponent(g: Graphics2D) =
       {
         super.paintComponent(g)
 
         viewStateOpt.map(vs => {
 
-          val bounds = g.getClipBounds
+          val bounds = g.getClipBounds // Retrieve the bounds of the area that is currently visible in the scroll pane
 
+          // Find out which tiles of the map are visible
           val (minX, minY, maxX, maxY, minXTile, minYTile, maxXTile, maxYTile) =
             TileUtils.getTileBounds(
               g.getClipBounds(), curTilesize, curTilesize,
@@ -98,7 +109,7 @@ class MapView(
           //logger.info("Paint Tiles: x: [%d,%d], y: [%d,%d]".format(
           //  minXTile, maxXTile, minYTile, maxYTile))
 
-          // draw tiles
+          // Draw tiles
           import MapLayers._
           val alphaList = List(botAlpha, midAlpha, topAlpha)
           val alphasAndData = vs.nextMapData.drawOrder zip alphaList
@@ -120,7 +131,7 @@ class MapView(
             }
           }
 
-          // draw all other events
+          // Draw all other events
           val evtFill = new Color(0.5f, 0.5f, 0.5f, 0.5f)
           drawWithAlpha(g, evtAlpha) {
 
