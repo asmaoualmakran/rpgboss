@@ -57,8 +57,8 @@ function start() {
   game.playMusic(0, project.data().startup().titleMusic(), true, 0.4);
   game.showPicture(0, project.data().startup().titlePic(), 
       game.layout(game.CENTERED(), game.SCREEN(), 1.0, 1.0));
-  game.setTransition(0, 1.0);
-  game.sleep(1);
+  game.setTransition(0, 0.5);
+  //game.sleep(1);
 
   showStartDialog();
 }

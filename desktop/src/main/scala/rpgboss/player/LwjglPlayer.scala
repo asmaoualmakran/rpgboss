@@ -5,6 +5,9 @@ import com.badlogic.gdx.backends.lwjgl._
 import com.badlogic.gdx._
 import rpgboss.model.resource.Picture
 
+/**
+  * Main singleton to start a new game created with the RpgBoss editor
+  */
 object LwjglPlayer {
   def launch(game: RpgGame) = {
     val conf = new LwjglApplicationConfiguration();
@@ -23,6 +26,7 @@ object LwjglPlayer {
       conf.addIcon(icon.getClasspathPath, Files.FileType.Classpath)
     }
 
+    // Start the game, via the LWJGL library (https://www.lwjgl.org/)
     new LwjglApplication(game, conf)
   }
 

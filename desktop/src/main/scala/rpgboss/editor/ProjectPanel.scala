@@ -83,6 +83,8 @@ class ProjectPanel(val mainP: MainPanel, sm: StateMaster)
       icon = new ImageIcon(Utils.readClasspathImage(
         "crystal_project/16x16/filesystems/folder_images.png"))
     }
+
+    // Play button; starts rpgboss.editor.RpgDesktop in a seperate process using the current project files
     contents += new Button(Action(getMessage("Play") + "...") {
       if (sm.askSaveUnchanged(this)) {
         def inheritIO(src: InputStream, dest: PrintStream) = {

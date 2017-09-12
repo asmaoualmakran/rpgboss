@@ -9,7 +9,7 @@ import javax.imageio.ImageIO
 import rpgboss.editor.Internationalized._
 
 /**
-  * Main singleton to start the RpgBoss editor
+  * Main singleton to start the RpgBoss editor, or start a game created with the editor
   */
 object RpgDesktop
   extends SwingApplication
