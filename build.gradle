@@ -9,6 +9,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
         classpath "com.github.maiflai:gradle-scalatest:0.10"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
     }
 }
 
@@ -38,6 +39,7 @@ allprojects {
 project(":desktop") {
     apply plugin: "java"
     apply plugin: "scala"
+    apply plugin: "org.sonarqube"
 
     mainClass = "rpgboss.editor.RpgDesktop"
 
