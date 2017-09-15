@@ -75,6 +75,7 @@ project(":desktop") {
 project(":core") {
     apply plugin: "java"
     apply plugin: "scala"
+    apply plugin: "org.sonarqube"
 
     apply plugin: "com.github.maiflai.scalatest"
 
