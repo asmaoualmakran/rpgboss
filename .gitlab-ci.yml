@@ -6,7 +6,7 @@ test-job:
   stage: test
   script:
     - Xvfb :10 -ac -screen 0 1024x768x24 &
-    - export JAVA_HOME=/exports/home/tmoldere/jdk1.8.0_102/jre
+    - export JAVA_HOME=/exports/home/tmoldere/jdk1.8.0_102
     - ./gradlew clean
     - DISPLAY=:10 ./gradlew build
     - pkill Xvfb
