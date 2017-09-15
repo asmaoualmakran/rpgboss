@@ -241,6 +241,7 @@ class MapEditor(
   //--- EVENT POPUP MENU ---//
   import MapLayers._
 
+  // Open a dialog to create a new event
   def newEvent(eventInstance: Boolean) = viewStateOpt map { vs =>
     val id = vs.mapMeta.lastGeneratedEventId + 1
     val x = canvasPanel.cursorSquare.x1 + 0.5f
@@ -254,6 +255,7 @@ class MapEditor(
     showEditDialog(true, vs, event)
   }
 
+  // Open a dialog to edit an event
   def editEvent(id: Int) = viewStateOpt map { vs =>
     val event = vs.nextMapData.events(id)
     showEditDialog(false, vs, event)
@@ -270,6 +272,12 @@ class MapEditor(
     newId
   }
 
+  /**
+    * Open an event editor
+    * @param isNewEvent
+    * @param vs
+    * @param event
+    */
   def showEditDialog(isNewEvent: Boolean, vs: MapViewState, event: RpgEvent) = {
     vs.begin()
 

@@ -62,6 +62,10 @@ class MapViewState(val sm: StateMaster, val mapName: String) {
     prevStates.size > 1
   }
 
+  /**
+    * Starts a new transaction to edit the map.
+    * (This must be called whenever you want to modify the map..)
+    */
   def begin() = {
     if (inTransaction) {
       throw new RuntimeException(
@@ -71,11 +75,17 @@ class MapViewState(val sm: StateMaster, val mapName: String) {
     }
   }
 
+  /**
+    * Cancel the current transaction, return to the state right before the transaction was started
+    */
   def abort() = {
     nextMapData = prevStates.head
     inTransaction = false
   }
 
+  /**
+    * Confirm the changes made to the map and end the transaction
+    */
   def commit() = {
     if (inTransaction) {
       prevStates = (nextMapData :: prevStates).take(10)

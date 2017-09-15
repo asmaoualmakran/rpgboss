@@ -18,7 +18,14 @@ import rpgboss.model.MapLoc
 import rpgboss.model.event.RpgEvent
 import rpgboss.editor.Internationalized._
 
-
+/**
+  * Dialog for creating and editing event instances (an event with pre-programmed behaviour)
+  * @param owner
+  * @param sm
+  * @param initialEvent
+  * @param onOk
+  * @param onCancel
+  */
 class EventInstanceDialog(
   owner: Window,
   sm: StateMaster,

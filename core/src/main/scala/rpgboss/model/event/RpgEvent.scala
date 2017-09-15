@@ -33,12 +33,13 @@ object EventHeight extends RpgEnum {
 }
 
 /**
- * @param   states          Guaranteed to be size at least 1, unless this event
- *                          is an event instance, in which case size must be 0.
- * @param   eventClassId    -1 if normal event. Otherwise, the id of the event
- *                          class this is an instance of.
- * @param   params          Variables to bind for the event class.
- */
+  * Model of an event, i.e. an entity the player can interact with .. an enemy, an NPC, a treasure chest, ...
+  * @param   states          Guaranteed to be size at least 1, unless this event
+  *                          is an event instance, in which case size must be 0.
+  * @param   eventClassId    -1 if normal event. Otherwise, the id of the event
+  *                          class this is an instance of.
+  * @param   params          Variables to bind for the event class.
+  */
 case class RpgEvent(
   id: Int = 0,
   var name: String = "",
