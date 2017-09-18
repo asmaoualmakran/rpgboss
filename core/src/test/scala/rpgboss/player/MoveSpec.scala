@@ -55,31 +55,31 @@ class MoveSpec extends UnitSpec {
 //    test.runTest()
 //  }
 
-  "MoveEvent" should "work with THIS_EVENT" in {
-    val test = new MapScreenTest {
-      override def setupMapData(mapData: RpgMapData) = {
-        super.setupMapData(mapData)
-        mapData.events = singleTestEvent(
-          MoveEvent(EntitySpec(WhichEntity.THIS_EVENT.id), 0f, 2f),
-          2f,
-          2f)
-      }
-
-      override def testScript() = {
-        scriptInterface.teleport(mapName, 0.5f, 0.5f)
-        scriptInterface.activateEvent(1, true)
-
-        val entityInfo = scriptInterface.getEventEntityInfo(1)
-
-        waiter {
-          val epsilon = 0.05f
-
-          entityInfo.x should be (2f +- epsilon)
-          entityInfo.y should be (4f +- epsilon)
-        }
-      }
-    }
-
-    test.runTest()
-  }
+//  "MoveEvent" should "work with THIS_EVENT" in {
+//    val test = new MapScreenTest {
+//      override def setupMapData(mapData: RpgMapData) = {
+//        super.setupMapData(mapData)
+//        mapData.events = singleTestEvent(
+//          MoveEvent(EntitySpec(WhichEntity.THIS_EVENT.id), 0f, 2f),
+//          2f,
+//          2f)
+//      }
+//
+//      override def testScript() = {
+//        scriptInterface.teleport(mapName, 0.5f, 0.5f)
+//        scriptInterface.activateEvent(1, true)
+//
+//        val entityInfo = scriptInterface.getEventEntityInfo(1)
+//
+//        waiter {
+//          val epsilon = 0.05f
+//
+//          entityInfo.x should be (2f +- epsilon)
+//          entityInfo.y should be (4f +- epsilon)
+//        }
+//      }
+//    }
+//
+//    test.runTest()
+//  }
 }

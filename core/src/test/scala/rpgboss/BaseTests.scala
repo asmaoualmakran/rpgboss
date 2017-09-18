@@ -131,6 +131,6 @@ abstract class MapScreenTest extends ProjectTest with HasScriptConstants {
 
   def runTest() = {
     val app = TestPlayer.launch(game)
-    waiter.await(Timeout(Span(120, Seconds)))
+    waiter.await(Timeout(Span(30, Seconds)))
   }
 }

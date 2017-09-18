@@ -69,33 +69,33 @@ class EventSpec extends UnitSpec {
 //    test.runTest()
 //  }
 
-  "Events" should "respect run once option" in {
-    val test = new MapScreenTest {
-      override def setupMapData(mapData: RpgMapData) = {
-        super.setupMapData(mapData)
-        val states = Array(
-          RpgEventState(runOnceThenIncrementState = true),
-          RpgEventState())
-        mapData.events = Map(
-          1->RpgEvent(1, "Testevent", 0, 0, states)
-        )
-      }
-
-      override def testScript() = {
-        val mapName = RpgMap.generateName(project.data.lastCreatedMapId)
-        val s1 = scriptInterface.getEventState(mapName, 1)
-        scriptInterface.activateEvent(1, true)
-        val s2 = scriptInterface.getEventState(mapName, 1)
-
-        waiter {
-          s1 should equal (0)
-          s2 should equal (1)
-        }
-      }
-    }
-
-    test.runTest()
-  }
+//  "Events" should "respect run once option" in {
+//    val test = new MapScreenTest {
+//      override def setupMapData(mapData: RpgMapData) = {
+//        super.setupMapData(mapData)
+//        val states = Array(
+//          RpgEventState(runOnceThenIncrementState = true),
+//          RpgEventState())
+//        mapData.events = Map(
+//          1->RpgEvent(1, "Testevent", 0, 0, states)
+//        )
+//      }
+//
+//      override def testScript() = {
+//        val mapName = RpgMap.generateName(project.data.lastCreatedMapId)
+//        val s1 = scriptInterface.getEventState(mapName, 1)
+//        scriptInterface.activateEvent(1, true)
+//        val s2 = scriptInterface.getEventState(mapName, 1)
+//
+//        waiter {
+//          s1 should equal (0)
+//          s2 should equal (1)
+//        }
+//      }
+//    }
+//
+//    test.runTest()
+//  }
 
   "Events" should "show text correctly" in {
     val test = new MapScreenTest {
