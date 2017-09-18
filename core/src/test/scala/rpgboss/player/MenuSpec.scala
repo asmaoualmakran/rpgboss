@@ -6,28 +6,30 @@ import rpgboss.player._
 import rpgboss.player.entity._
 
 class MenuSpec extends UnitSpec {
-  "Menu" should "open and then close" in {
-    val test = new MapScreenTest {
-      override def dismissWaiterAtEndOfTestScript = false
 
-      override def testScript() = {
-        scriptInterface.syncRun {
-          game.mapScreen.scriptFactory.runFromFile(
-            "sys/menu.js",
-            "menu()",
-            Some(() => {
-              waiter.dismiss()
-            }))
-        }
 
-        // TODO: Fix hack maybe. Wait one second for menu to open.
-        scriptInterface.sleep(1.0f)
-        scriptInterface.mapScreenKeyPress(MyKeys.Cancel)
-      }
-    }
-
-    test.runTest()
-  }
+//  "Menu" should "open and then close" in {
+//    val test = new MapScreenTest {
+//      override def dismissWaiterAtEndOfTestScript = false
+//
+//      override def testScript() = {
+//        scriptInterface.syncRun {
+//          game.mapScreen.scriptFactory.runFromFile(
+//            "sys/menu.js",
+//            "menu()",
+//            Some(() => {
+//              waiter.dismiss()
+//            }))
+//        }
+//
+//        // TODO: Fix hack maybe. Wait one second for menu to open.
+//        scriptInterface.sleep(1.0f)
+//        scriptInterface.mapScreenKeyPress(MyKeys.Cancel)
+//      }
+//    }
+//
+//    test.runTest()
+//  }
 
   "Party Status Menu" should "loop correctly" in {
     val test = new MapScreenTest {

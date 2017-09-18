@@ -14,46 +14,46 @@ import rpgboss.player._
 import rpgboss.player.entity.EntityMove
 
 class MoveSpec extends UnitSpec {
-  "Move" should "move right simple" in {
-    val test = new MapScreenTest {
-      override def testScript() = {
-        scriptInterface.teleport(mapName, 0.5f, 0.5f);
-        scriptInterface.movePlayer(1f, 0)
+//  "Move" should "move right simple" in {
+//    val test = new MapScreenTest {
+//      override def testScript() = {
+//        scriptInterface.teleport(mapName, 0.5f, 0.5f);
+//        scriptInterface.movePlayer(1f, 0)
+//
+//        val player = scriptInterface.getPlayerEntityInfo()
+//
+//        waiter {
+//          val epsilon = 0.05f
+//          player.x should be (1.5f +- epsilon)
+//          player.y should be (0.5f +- epsilon)
+//        }
+//      }
+//    }
+//
+//    test.runTest()
+//  }
 
-        val player = scriptInterface.getPlayerEntityInfo()
-
-        waiter {
-          val epsilon = 0.05f
-          player.x should be (1.5f +- epsilon)
-          player.y should be (0.5f +- epsilon)
-        }
-      }
-    }
-
-    test.runTest()
-  }
-
-  "Move" should "should work in reponse to key press" in {
-    val test = new MapScreenTest {
-      override def testScript() = {
-        scriptInterface.teleport(mapName, 0.5f, 0.5f)
-
-        // TODO: fix hardcoded speed here
-        val speed = 4f
-        scriptInterface.mapScreenKeyPress(MyKeys.Right, 5f / speed)
-
-        val player = scriptInterface.getPlayerEntityInfo()
-
-        waiter {
-          val epsilon = 1.0f // slack because of sloppy key press simulation
-          player.x should be (5.5f +- epsilon)
-          player.y should be (0.5f +- epsilon)
-        }
-      }
-    }
-
-    test.runTest()
-  }
+//  "Move" should "should work in reponse to key press" in {
+//    val test = new MapScreenTest {
+//      override def testScript() = {
+//        scriptInterface.teleport(mapName, 0.5f, 0.5f)
+//
+//        // TODO: fix hardcoded speed here
+//        val speed = 4f
+//        scriptInterface.mapScreenKeyPress(MyKeys.Right, 5f / speed)
+//
+//        val player = scriptInterface.getPlayerEntityInfo()
+//
+//        waiter {
+//          val epsilon = 1.0f // slack because of sloppy key press simulation
+//          player.x should be (5.5f +- epsilon)
+//          player.y should be (0.5f +- epsilon)
+//        }
+//      }
+//    }
+//
+//    test.runTest()
+//  }
 
   "MoveEvent" should "work with THIS_EVENT" in {
     val test = new MapScreenTest {
