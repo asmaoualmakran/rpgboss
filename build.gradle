@@ -42,7 +42,16 @@ project(":desktop") {
     apply plugin: "scala"
     apply plugin: "org.sonarqube"
 
+    apply plugin: "com.github.maiflai.scalatest"
+    apply plugin: "org.scoverage"
+
     mainClass = "rpgboss.editor.RpgDesktop"
+
+    reportScoverage {
+        dependencies {
+            scoverage 'org.scoverage:scalac-scoverage-plugin_2.11:1.1.0', 'org.scoverage:scalac-scoverage-runtime_2.11:1.1.0'
+        }
+    }
 
     dependencies {
         compile project(":core")
@@ -62,7 +71,7 @@ project(":desktop") {
         compile "com.fifesoft:rsyntaxtextarea:2.5.3"
         compile "net.coobird:thumbnailator:0.4.8"
 
-        testCompile 'org.scoverage:scalac-scoverage-plugin_2.11:1.1.0', 'org.scoverage:scalac-scoverage-runtime_2.11:1.1.0'
+        // testCompile 'org.scoverage:scalac-scoverage-plugin_2.11:1.1.0', 'org.scoverage:scalac-scoverage-runtime_2.11:1.1.0'
     }
 
     tasks.withType(ScalaCompile) {
@@ -79,7 +88,8 @@ project(":desktop") {
         properties {
             property "sonar.projectName", "RpgBoss - Desktop"
             property "sonar.projectKey", "rpgboss-desktop"
-            property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+            property "sonar.projectBaseDir", "/exports/home/tmoldere/gitlab/rpgboss/desktop/"
+	    property "sonar.scoverage.reportPath", "build/reports/scoverage/scoverage.xml"
         }
     }
 }
@@ -90,6 +100,13 @@ project(":core") {
     apply plugin: "org.sonarqube"
 
     apply plugin: "com.github.maiflai.scalatest"
+    apply plugin: "org.scoverage"
+
+    reportScoverage {
+        dependencies {
+            scoverage 'org.scoverage:scalac-scoverage-plugin_2.11:1.1.0', 'org.scoverage:scalac-scoverage-runtime_2.11:1.1.0'
+        }
+    }
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -113,7 +130,7 @@ project(":core") {
 
         testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        testCompile 'org.scoverage:scalac-scoverage-plugin_2.11:1.1.0', 'org.scoverage:scalac-scoverage-runtime_2.11:1.1.0'
+        // testCompile 'org.scoverage:scalac-scoverage-plugin_2.11:1.1.0', 'org.scoverage:scalac-scoverage-runtime_2.11:1.1.0'
     }
 
     test {
