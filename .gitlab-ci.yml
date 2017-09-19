@@ -9,4 +9,7 @@ test-job:
     - export JAVA_HOME=/exports/home/tmoldere/jdk1.8.0_102
     - ./gradlew clean
     - DISPLAY=:10 ./gradlew build
+    - DISPLAY=:10 ./gradlew reportScoverage
     - pkill Xvfb
+    - ./gradlew sonar
+    - cp -R core/build/reports/scoverage ~/public_html/se0_1718/scoverage
