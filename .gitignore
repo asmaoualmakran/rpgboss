@@ -15,7 +15,7 @@ project/plugins/project
 Thumbs.db
 *.log
 .gradle
-build/
+build/*
 android/build
 core/build
 desktop/build
