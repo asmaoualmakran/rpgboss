@@ -29,6 +29,7 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
         maven { url 'https://jitpack.io' }
         maven { url 'http://oss.sonatype.org/content/groups/public'}
+        maven { url 'https://labs.consol.de/maven/repository'}
     }
 
     tasks.withType(ScalaCompile) {
