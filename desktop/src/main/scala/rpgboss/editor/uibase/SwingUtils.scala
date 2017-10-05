@@ -265,6 +265,15 @@ object SwingUtils {
     group
   }
 
+  /**
+    * Setup the behaviour of each button in an enumeration of buttons
+    * @param enum an enumeration of buttons (without behaviour)
+    * @param initial indicates which buttons should be selected initially
+    * @param selectF the function to call when clicking any of the buttons
+    * @param iconPaths which icons to use for each button
+    * @tparam T
+    * @return
+    */
   def enumButtons[T <: Enumeration](enum: T)(
       initial: enum.Value,
       selectF: enum.Value => Any,

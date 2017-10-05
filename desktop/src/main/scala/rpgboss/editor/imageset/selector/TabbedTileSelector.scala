@@ -50,8 +50,8 @@ class TabbedTileSelector(sm: StateMaster)
       // select first Autotile code
       selectedTileCodes = defaultTileCodes
 
+      // When selecting a tile, update selectedTileCodes to represent the current selection
       listenTo(selection)
-
       reactions += {
         case SelectionChanged(pane) => selectedTileCodes =
           selection.page.content.asInstanceOf[TileBytesSelector].selectionBytes

@@ -71,6 +71,7 @@ project(":desktop") {
         compile "com.fifesoft:rsyntaxtextarea:2.5.3"
         compile "net.coobird:thumbnailator:0.4.8"
 
+        testCompile 'com.sikulix:sikulixapi:1.1.1-SNAPSHOT'
         // testCompile 'org.scoverage:scalac-scoverage-plugin_2.11:1.1.0', 'org.scoverage:scalac-scoverage-runtime_2.11:1.1.0'
     }
 
@@ -130,7 +131,6 @@ project(":core") {
 
         testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        // testCompile 'org.scoverage:scalac-scoverage-plugin_2.11:1.1.0', 'org.scoverage:scalac-scoverage-runtime_2.11:1.1.0'
     }
 
     test {
