@@ -71,7 +71,7 @@ project(":desktop") {
         compile "com.fifesoft:rsyntaxtextarea:2.5.3"
         compile "net.coobird:thumbnailator:0.4.8"
         
-        testCompile 'com.sikulix:sikulixapi:1.1.2'
+        testCompile 'com.sikulix:sikulixapi:1.1.2-SNAPSHOT'
     }
 
     tasks.withType(ScalaCompile) {
