@@ -70,6 +70,11 @@ project(":desktop") {
         compile "com.fifesoft:rsyntaxtextarea:2.5.3"
         compile "net.coobird:thumbnailator:0.4.8"
 
+        testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+        testCompile "org.scalatest:scalatest_2.11:2.1.5"
+        testRuntime 'org.pegdown:pegdown:1.1.0'
+        testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+        testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         testCompile files("libs/sikulixapi.jar")
         
 //        testCompile 'com.sikulix:sikulixapi:1.1.0'
@@ -125,7 +130,6 @@ project(":core") {
         testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         testCompile "org.scalatest:scalatest_2.11:2.1.5"
         testRuntime 'org.pegdown:pegdown:1.1.0'
-
         testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
     }
