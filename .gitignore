@@ -1,6 +1,5 @@
 common/lib/
 downloaded-libs
-libs/
 target/
 eclipsetarget/
 src_managed/
