@@ -1,10 +1,8 @@
 package rpgboss.editor.BST
 
-abstract class Node {
+abstract class Node[T] {
 
-  def set_parent()
-  def set_lchild()
-  def set_rchild()
-  def set_node_value(node_value:Object)
+  def init_node()
+  def set_node_value(node_value: T)
 
 }

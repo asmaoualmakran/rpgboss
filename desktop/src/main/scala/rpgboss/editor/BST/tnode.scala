@@ -1,6 +1,6 @@
 package rpgboss.editor.BST
 
-trait tnode {
+trait tnode[T] {
 
   def parent()
   def lchild()
