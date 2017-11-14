@@ -1,37 +1,43 @@
 package rpgboss.editor.BST
-import scala.collection.immutable
 
-class BST[T] extends Node{
+import scala.collection.immutable.TreeSet
 
-  var tree = init_tree()
+
+
+class BST[T]{
+
+  var tree = TreeSet.empty[T]
+
 
   /*
     Initialize the tree, it will not contain a value
    */
-  def init_tree(): Unit = {
-    scala.collection.immutable.TreeSet.empty[T]
+  def init_tree(): Unit= {
+    this.tree = new TreeSet[T]()
   }
 
   /*
-    Initialize a node, the node will not contain a value
-    this will need to be set later
+    A node is also a tree. Initializing a node -> creating a new tree
    */
-  override def init_node(): Unit = {
-    scala.collection.immutable.TreeSet.empty[T]
+
+  def init_node(node: Object[T]): TreeSet[T] = {
+    var new_node = new TreeSet[T]()
+    return new_node
   }
 
   /*
-    Add an node to the tree, the node needs to have a value
-    --> type is needed
+    Takes a node and a value, and sets the value to a node
    */
-  def add_node(node: T): Unit = {
-    tree.union(node)
+  def set_value_node(node_value: Object[T],node: TreeSet[T]): Unit ={
+      node.+(node_value[T])
   }
 
-  override def set_node_value(node_value: T): Unit = {
+  /*
+    Takes a node and adds it to the existing tree
+   */
 
+  def add_node(node: TreeSet[T]): Unit = {
+    tree = tree.union(node)
   }
-
-
 
 }
