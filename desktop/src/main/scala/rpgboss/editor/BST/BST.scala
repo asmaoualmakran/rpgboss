@@ -1,43 +1,39 @@
 package rpgboss.editor.BST
 
-import scala.collection.immutable.TreeSet
+import scala.collection.mutable.TreeSet
 
+/*
+  This implementation extends TreeSet to implement a Binary search tree
+ */
+class BST [T] extends TreeSet{
 
+object DescendingOrder{
+    implicit val order = new Ordering[T]{
+      override def compare(node1: T, node2: T): Int = {
+      /*
+      write code for comparing here
+       */
+      }
 
-class BST[T]{
-
-  var tree = TreeSet.empty[T]
-
-
-  /*
-    Initialize the tree, it will not contain a value
-   */
-  def init_tree(): Unit= {
-    this.tree = new TreeSet[T]()
+    }
   }
 
-  /*
-    A node is also a tree. Initializing a node -> creating a new tree
-   */
+  var root = TreeSet.empty[T](DescendingOrder)
 
-  def init_node(node: Object[T]): TreeSet[T] = {
-    var new_node = new TreeSet[T]()
+  def init_tree(value:T): TreeSet[T] ={
+    root += value
+    return root
+  }
+
+
+
+  def add_node (value:T): TreeSet[T] ={
+    var new_node = TreeSet.empty[T]
+    new_node += value
     return new_node
   }
 
-  /*
-    Takes a node and a value, and sets the value to a node
-   */
-  def set_value_node(node_value: Object[T],node: TreeSet[T]): Unit ={
-      node.+(node_value[T])
-  }
 
-  /*
-    Takes a node and adds it to the existing tree
-   */
 
-  def add_node(node: TreeSet[T]): Unit = {
-    tree = tree.union(node)
-  }
 
 }

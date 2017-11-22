@@ -2,15 +2,10 @@ package rpgboss.editor.map_generator
 
 import rpgboss.editor.BST.BST
 
+class MapGenerator(iterations:Int, seed:Int, canvas_height: Int, canvas_width:Int) {
 
-class MapGenerator(iterations:Int, seed:Int, canvas_width: Int, canvas_height:Int) {
-
-  val start_point = 1
-  /*
-    the root is not counted as an iterations
-   */
-  val tree_size = (iterations + start_point)
-  var tree = new BST(tree_size)
+      val start_container  = new Container(0, 0, canvas_height, canvas_width )
+      val tree = new BST
 
 
 
