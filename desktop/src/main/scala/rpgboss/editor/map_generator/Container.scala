@@ -19,6 +19,8 @@ class Container(x:Int, y:Int, h:Int, w:Int) {
   val upper_bound = this.y
   val lower_bound = this.h
   val right_bound = this.w
+  val width = right_bound - left_bound
+  val height = lower_bound - upper_bound
   val random = new Random()
 
   /*
@@ -35,7 +37,16 @@ class Container(x:Int, y:Int, h:Int, w:Int) {
     return point
   }
 
-
+  /*
+    Calculates the surface of the container, this is needed
+    for sorting on size of the containers
+    a container of an iterations can never be lager than the containers from the
+    previous iteration
+   */
+  def size():Int = {
+    val surface = width*height
+    return surface
+  }
 
   def center():List[Int] = {
 
