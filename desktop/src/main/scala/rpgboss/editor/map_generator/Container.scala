@@ -13,7 +13,7 @@ import scala.util.Random
  */
 
 
-class Container(x:Int, y:Int, h:Int, w:Int) {
+case class Container(x:Int, y:Int, h:Int, w:Int) {
 
   val left_bound  = this.x
   val upper_bound = this.y
