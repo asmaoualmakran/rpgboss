@@ -1,47 +1,111 @@
 package rpgboss.editor.BST
 
-import scala.collection.mutable.TreeSet
 
 /*
   Every node of the bst has type T
   Were using generic typing
  */
 
-class BinarySearchTree[T]() extends Tnode[T]{
+class BinarySearchTree[T](size: Int) extends Tnode[T]{
 
-  var tree = new TreeSet[Node[T]]()     // the tree contains nodes of type Node[T]
+  val treeArray = Array.ofDim[Node[T]](size)     // the tree contains nodes of type Node[T]
+  val rootIndex = 0
+
   /*
-    TODO: schrijf een implicit ordering
+    Initialize the tree, this will happen automatically when the
+    first node is added
    */
 
+  private def initTree(node:Node[T]): Unit ={
+    treeArray(rootIndex) = node
+  }
+
   def getRoot(): Node[T]={
-    /*
-    check of de boom null is?
-    is het leeg geef dan null terug
-    ander geef je de root terug
-     */
+
+    if(treeArray.nonEmpty){
+      return treeArray.head
+    }else{
+      return null
+
+    }
   }
 
-  override def setChild(node:Node[T], childNode:Node[T]): Unit ={
-    node.child = childNode
+
+  /*
+    The node passed as pm, is not always the last node in the TreeSet
+   */
+  override def setChild(node:Node[T],newChildNode:Node[T]): Unit ={
+
+  /*  val newParentNode = findFreeLocation()
+
+    if(newParentNode == null){
+      addNode(childNode)   // if the tree is empty
+
+    }else if(newParentNode.leftChild == null){
+      newParentNode.leftChild = childNode
+      childNode.parent = newParentNode
+
+    }else if(newParentNode.rightChild == null){
+      newParentNode.rightChild = childNode
+      childNode.parent = newParentNode
+
+    } */
+    if(getRoot() == null){
+      initTree(newChildNode)     // in this case the tree has not been initialized yet with a root
+                              // we add te new node, and set is as root
+    }else if(node.leftChild == null) {  // we check if one of the children is null, if so there is a location free
+      node.leftChild = newChildNode
+
+    }else if(node.rightChild == null){
+      node.rightChild = newChildNode
+
+    }else{
+     sys.error("This node already has a left and a right child") //if none of the locations are free
+                                                                  // we throw an error
+    }
   }
 
-  override def setParent(node: Node[T], parentNode: Node[T]): Unit ={
-    node.parent = parentNode
+  /*
+    Set the parent of the node to a specific node
+   */
+
+  override def setParent(node:Node[T],newParentNode: Node[T]): Unit ={
+    if(node.parent == null) {
+      node.parent = newParentNode
+
+    }else{
+     sys.error("This node already has a parent")
+    }
   }
 
-  def addNode(nodeValue: T): Unit ={
-    val newNode = new Node[T](nodeValue)
-    /*
-    TODO:
-    check of de boom leeg is, is die leeg, dan zet je deze node
-    als root en heeft die zowel geen parent als geen child
-    Get de laatste node in de boom, zet de in de huidige laatste node
-    de nieuwe laatste node als child, en zet de huidige laatste dan als parent
-    van de nieuwe node. laat de child naar null wijzen ==> verander daar niets aan
 
-     */
+  private  def findFreeLocation(): Node[T]={
+    if(getRoot() == null){
+      return null
+    }else{
+      //TODO: loop over de array en check alle linker en rechter $
+      // kinderen van de nodes
+    }
+
   }
+
+
+  private  def addNode(newNode: Node[T]): Unit ={
+    val lastNode = findFreeLocation()
+    setChild(lastNode, newNode)
+    setParent(newNode, lastNode)
+    println("Node added: ", newNode)
+  }
+
+  def addValue(newValue:T): Unit={
+    val newNode = new Node[T](newValue)
+    println("Node created with value: ", newValue)
+    addNode(newNode)
+
+  }
+
+
+
 
 
 

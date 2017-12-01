@@ -5,7 +5,8 @@ class Node[T](value: T) extends Tnode[T] {
 
   var hasNext = false
   var hasParent = false
-  var child: Node[T] = null
+  var leftChild: Node[T] = null
+  var rightChild: Node[T] = null
   var parent: Node[T] = null
 
   override def getValue(): T={
@@ -16,8 +17,12 @@ class Node[T](value: T) extends Tnode[T] {
    return parent
  }
 
-  override def getChild(): Node[T]={
-    return this.child
+  override def getLeftChild(): Node[T] = {
+    return this.leftChild
+  }
+
+  override def getRightChild(): Node[T] = {
+    return this.rightChild
   }
 
 
