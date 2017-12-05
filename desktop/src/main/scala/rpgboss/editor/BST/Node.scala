@@ -1,5 +1,14 @@
 package rpgboss.editor.BST
 
+/*
+  Author: Asma Oualmakran
+  Class: Node
+  Parameters: size: value:T
+    use: The value the Node must carry
+  Use: Create a Node with a specified value
+ */
+
+
 class Node[T](value: T) extends Tnode[T] {
 
 

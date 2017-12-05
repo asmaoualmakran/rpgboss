@@ -41,6 +41,8 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
     }
   }
 
+  // TODO: MOVE ALL NODE PREDICATES TO NODE!!!! + methods like set parent ect
+
   /*
     Determine if a node is a leaf
    */
