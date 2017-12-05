@@ -37,19 +37,31 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
       return treeArray.head
     }else{
       return null
-
     }
   }
 
   /*
     Determine if a node is a leaf
    */
-  
+
   private def isLeaf_?(node: Node[T]): Boolean={
     val left = node.leftChild
     val right = node.rightChild
 
     return left == null && right == null
+  }
+
+  /*
+    Determine if a node has a left or a right child
+   */
+  private def hasLeftChild_?(node: Node[T]): Boolean={
+
+    return node.leftChild == null
+  }
+
+  private def hasRightChild_?(node: Node[T]): Boolean={
+
+    return node.rightChild == null
   }
 
   /*
@@ -112,9 +124,27 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
     if(root == null){
       return null
 
-    }
+    }else{
+      if(!hasLeftChild_?(root) || !hasRightChild_?(root)){
+        return root       // if one of the 2 locations is free, the root is a possible canditate
 
-  }
+        }else{            // if the root is not a possible parent, we are going to loop over the sub trees
+          def loop(node: Node[T]): Node[T] ={
+              if(!hasLeftChild_?(node) || !hasRightChild_?(node)){ //in this case one of the locations is free
+                return node
+              }else{
+                loop(node.rightChild)   // we are always going right if we loop TODO: check this
+              }
+          }
+
+          val freeNode = loop(root)
+          return freeNode
+          }
+        }
+      }
+
+
+
 
   /*
     This wil be used by addValue(newValue:T) to add an new value to the tree
