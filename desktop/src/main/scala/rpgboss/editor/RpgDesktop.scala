@@ -6,6 +6,7 @@ import com.typesafe.scalalogging.slf4j.LazyLogging
 import java.lang.Thread.UncaughtExceptionHandler
 import javax.swing.UIManager
 import javax.imageio.ImageIO
+
 import rpgboss.editor.Internationalized._
 
 /**
@@ -86,6 +87,7 @@ object RpgDesktop
       super.main(args)
     }
   }
+
 }
 
 class EDTErrorHandler {

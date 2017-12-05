@@ -1,6 +1,6 @@
 package rpgboss.editor.map_generator
 import scala.util.Random
-
+/*
 /*
   Author: Asma Oualmakran
   Class: Container; constructs a container which is a subsection
@@ -79,3 +79,5 @@ case class Container(x:Int, y:Int, h:Int, w:Int) {
 
 
 }
+
+*/

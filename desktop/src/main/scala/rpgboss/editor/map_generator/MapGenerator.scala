@@ -1,5 +1,7 @@
 package rpgboss.editor.map_generator
 
+
+/*
 import scala.util.Sorting
 
 class MapGenerator(iterations:Int, seed:Int, canvas_height: Int, canvas_width:Int) {
@@ -13,3 +15,5 @@ class MapGenerator(iterations:Int, seed:Int, canvas_height: Int, canvas_width:In
      }
 
 }
+
+*/
