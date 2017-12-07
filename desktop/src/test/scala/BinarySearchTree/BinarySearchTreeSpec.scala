@@ -1,17 +1,18 @@
 package BinarySearchTree
 
 
-import rpgboss.editor.BST.{BinarySearchTree, Node}
+import rpgboss.editor.BST.BinarySearchTree
 import rpgboss.editor.UnitSpec
 
 class BinarySearchTreeSpec extends UnitSpec{
+
 
 
   /*
     BinarySearchTree tests
     Author: Asma Oualmakran
    */
-  "A BinarySearchTree" should "add nodes with values" in{
+  /*"A BinarySearchTree" should "add nodes with values" in{
     val newTree = new BinarySearchTree[Int](50)
     newTree.addValue(2)
     newTree.addValue(5)
@@ -28,36 +29,26 @@ class BinarySearchTreeSpec extends UnitSpec{
     tree.addValue(555)
     tree.addValue(306)
     tree.getRoot()
+  }*/
+  "A BinarySearchTree" should "return null" in{
+    val emptyTree = new BinarySearchTree[Int](50)
+    emptyTree.getRoot()
   }
+  it should "add a node to the BinarySearchTree with a given value" in{
+    val testTree = new BinarySearchTree[Int](50)
+    testTree.addValue(2)
+    testTree.addValue(30)
+    testTree.addValue(50)
+    testTree.addValue(1000359)
+    testTree.printTree()
 
 
-  /*
-    Node tests
-    Author: Asma Oualmakran
-   */
 
-  "A Node" should "return it's value" in{
-    val node = new Node[Int](5)
-    node.getValue()
+  //  testTree.addValue(3)
+   // println("current tree 2",testTree)
+   // testTree.addValue(5)
+   // println("current tree 3",testTree)
   }
-  it should "return it's parent node" in{
-    val node = new Node[Int](55)
-    val parentNode = new Node[Int](60)
-    node.parent = parentNode
-    parentNode.leftChild = node
-    node.getParent()
-  }
-  it should "return it's left child" in{
-    val node = new Node[Int](5)
-    val leftChild = new Node(50)
-    leftChild.parent = leftChild
-    node.getLeftChild()
-  }
-  it should "return it's right child" in{
-    val node = new Node[Int](5)
-    val rightChild = new Node(50)
-    rightChild.parent = rightChild
-    node.getRightChild()
-  }
+
 
 }

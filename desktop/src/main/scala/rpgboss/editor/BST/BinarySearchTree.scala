@@ -4,20 +4,37 @@ package rpgboss.editor.BST
 /*
   Author: Asma Oualmakran
   Class: BinarySearchTree
-  Parameters: size:Int
-    use: Determine the size (number of nodes in the tree)
+  Parameters:
+    T: type parameter
+      use: Determine the types in the tree
+    size:Int
+      use: Determine the size (number of nodes in the tree)
   Use: Create a unordered binary search tree
  */
 
 /*
-  Every node of the bst has type T
-  Were using generic typing
+  BinarySearchTree with type parameter
  */
 
 class BinarySearchTree[T](size: Int) extends Tnode[T]{
 
-  val treeArray = Array.ofDim[Node[T]](size)     // the tree contains nodes of type Node[T]
-  val rootIndex = 0
+  /*
+    TODO: bekijk of er een array bestaat die resizable is, een boom kan in principe nooit vol zijn
+   */
+  private var treeArray = Array.ofDim[Node[T]](size)     // the tree contains nodes of type Node[T]
+  private val rootIndex = 0
+  private val rootNode = treeArray(rootIndex)
+
+  def printTree(): Unit ={
+    for(i <- 0 to treeArray.length-1){
+      val node = treeArray(i)
+      if(node == null){
+        print(0, ", ")
+      }
+      print(node.getValue(),", ")
+    }
+  }
+
 
   /*
     Initialize the tree, this will happen automatically when the
@@ -33,9 +50,17 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
    */
 
   def getRoot(): Node[T]={
+    val root = getNode(rootIndex)
+    return root
+  }
 
+  /*
+    Get a node form the tree useing an index
+   */
+
+  private def getNode(index:Int): Node[T]={
     if(treeArray.nonEmpty){
-      return treeArray.head
+      return treeArray(index)
     }else{
       return null
     }
@@ -43,29 +68,8 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
 
   // TODO: MOVE ALL NODE PREDICATES TO NODE!!!! + methods like set parent ect
 
-  /*
-    Determine if a node is a leaf
-   */
 
-  private def isLeaf_?(node: Node[T]): Boolean={
-    val left = node.leftChild
-    val right = node.rightChild
 
-    return left == null && right == null
-  }
-
-  /*
-    Determine if a node has a left or a right child
-   */
-  private def hasLeftChild_?(node: Node[T]): Boolean={
-
-    return node.leftChild == null
-  }
-
-  private def hasRightChild_?(node: Node[T]): Boolean={
-
-    return node.rightChild == null
-  }
 
   /*
     Balance the tree after adding a node
@@ -78,75 +82,82 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
   }
 
 
-  /*
-    The node passed as pm, is not always the last node in the TreeSet
-   */
-  override def setChild(node:Node[T],newChildNode:Node[T]): Unit ={
 
-    if(getRoot() == null){
-      initTree(newChildNode)     // in this case the tree has not been initialized yet with a root
-                              // we add te new node, and set is as root
-    }else if(node.leftChild == null) {  // we check if one of the children is null, if so there is a location free
-      node.leftChild = newChildNode
-
-    }else if(node.rightChild == null){
-      node.rightChild = newChildNode
-
-    }else{
-     sys.error("This node already has a left and a right child") //if none of the locations are free
-                                                                  // we throw an error
+  private def isFull_?(): Boolean={
+    for(i<-0 to treeArray.length){
+      println("start looping locations")
+      if(getNode(i) == null){
+        println("there is place in the array")
+        return false
+      }
+      /*else{
+      //  sys.error("Tree is full, no node can be added: isFull?")
+        return false
+      }*/
     }
+    println("no place trow error")
+    sys.error("Tree is full, no node can be added: isFull_?")
   }
-
-  /*
-    Set the parent of the node to a specific node
-   */
-
-  override def setParent(node:Node[T],newParentNode: Node[T]): Unit ={
-    if(node.parent == null) {
-      node.parent = newParentNode
-
-    }else{
-     sys.error("This node already has a parent")
-    }
-  }
-
   /*
     Find the last free index in the array, to enable to store
     a node on that location
    */
-  //TODO: Check hoe dit correct moet
-  private def findLastFreeIndex(): Int ={
-    val lastElement = treeArray.last
-    val lastIndex = treeArray.lastIndexOf(lastElement)
-    return lastIndex + 1
-  }
 
-  private  def findFreeLocation(): Node[T]={
-    val root = getRoot()
-    if(root == null){
-      return null
+
+  /*
+    This function determines a free location for the node in the tree
+   */
+
+  private def findTreeLocation(): Node[T]={
+
+    if(isFull_?()){
+      println("We can't add this node tree is full")
+      sys.error("No free location to be found: findLastIndex()")
+    }else if(treeArray(rootIndex) == null){
+      println("the root is empty this is our location")
+      return treeArray(rootIndex)
 
     }else{
-      if(!hasLeftChild_?(root) || !hasRightChild_?(root)){
-        return root       // if one of the 2 locations is free, the root is a possible canditate
+       println("we make our loop function")
+       def loop(node: Node[T]): Node[T]= {
+         println("check index")
+         if (treeArray.indexOf(node) < treeArray.length) {
+           println("node is in range")
 
-        }else{            // if the root is not a possible parent, we are going to loop over the sub trees
-          def loop(node: Node[T]): Node[T] ={
-              if(!hasLeftChild_?(node) || !hasRightChild_?(node)){ //in this case one of the locations is free
-                return node
-              }else{
-                loop(node.rightChild)   // we are always going right if we loop TODO: check this
-              }
-          }
+           if (!node.hasLeftChild_?() || !node.hasRightChild_?()){ // if either of these 2 locations is free, the node is returned
+             println("one of the child locations is free")
+             return node // we only get in the else case if both locations are taken
+           } else {
+             println("start recursive call")
+             loop(node.getLeftChild())
+             loop(node.getRightChild())
+           }
+         }else{
+           sys.error("The node is out of range")
+         }
+       }
+      return loop(rootNode)
+    }
 
-          val freeNode = loop(root)
-          return freeNode
-          }
+  }
+
+  /*
+    This function determines the first free location in the
+    array representing the tree
+   */
+  private def findArrayLocation(): Int={
+    if(treeArray == null){
+      return rootIndex
+    }else{
+      for(i <- 0 to treeArray.length){
+        if(treeArray(i) == null){
+          return i
         }
       }
+      sys.error("There is no free location: findArrayLocastion()")
+    }
 
-
+  }
 
 
   /*
@@ -154,30 +165,29 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
     the new value must be a node to be valid
    */
   private  def addNode(newNode: Node[T]): Unit ={
-    val lastNode = findFreeLocation()
-    if(lastNode == null){
-      initTree(newNode)
-    }else {
-
-      setChild(lastNode, newNode)
-      setParent(newNode, lastNode)
-      balanceTree()
-    }
-    println("Node added: ", newNode)
+    val freeLoc = findTreeLocation()
+  //  newNode.setParent(newNode, freeLoc) //set the pointers to the nodes right
+  //  freeLoc.setChild(freeLoc,newNode)
+    val arrayLoc = findArrayLocation()
+    treeArray.update(arrayLoc,newNode)  //TODO: moet update gebruiken om nodes toe te voegen
+    // append the element to the array
   }
+  /*
+    NOTE: we use the def update(index:Int, element:T) to add an element to the node
+          this choice is made due to the fact that def :+(element:T) doesn't add the element
+          to the array, the expected result is not produced using this function
+   */
 
   /* This wil make it possible for the user to add a value to
       the tree
    */
   def addValue(newValue:T): Unit={
     val newNode = new Node[T](newValue)
-    println("Node created with value: ", newValue)
+  //  println("Node created with value: ", newValue)
     addNode(newNode)
 
+
   }
-
-
-
 
 
 
