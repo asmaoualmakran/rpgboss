@@ -18,9 +18,23 @@ class Node[T](value: T) extends Tnode[T] {
   var rightChild: Node[T] = null
   var parent: Node[T] = null
 
+  /*
+    Function: getValue
+    Parameters: n/a
+    Return: T
+    Use: Get the value of the node.
+   */
+
   override def getValue(): T={
     return this.value
   }
+
+  /*
+    Function: getParent
+    Parameters: n/a
+    Return: Node[T]
+    Use: Get the parent of the node, if it exists.
+   */
 
  override def getParent(): Node[T]={
    if(hasParent_?()){
@@ -30,12 +44,26 @@ class Node[T](value: T) extends Tnode[T] {
 
  }
 
+  /*
+    Function: getLeftChild
+    Parameters: n/a
+    Return: Node[T]
+    Use: Get the left child of the node, if it exists.
+   */
+
   override def getLeftChild(): Node[T]={
     if(this.leftChild != null){
       return this.leftChild
     }
     sys.error("Node has no left child: getLeftChild()| Node")
   }
+
+  /*
+    Function: getRightChild
+    Parameters: n/a
+    Return: Node[T]
+    Use: Get the right child of the node, if it exits.
+   */
 
   override def getRightChild(): Node[T]={
     if(this.rightChild != null){
@@ -44,6 +72,13 @@ class Node[T](value: T) extends Tnode[T] {
     sys.error("Node has no right child: getRightChild()| Node")
   }
 
+  /*
+    Function: hasParent_?
+    Parameter: n/a
+    Return: Boolean
+    Use: Returns true when the node has a parent node.
+   */
+
   def hasParent_?(): Boolean={
     if(parent != null){
       return true
@@ -51,12 +86,26 @@ class Node[T](value: T) extends Tnode[T] {
     false
   }
 
+  /*
+    Function: hasLeftChild_?
+    Parameter: n/a
+    Return: Boolean
+    Use: Returns true when the node has a left child.
+   */
+
   def hasLeftChild_?(): Boolean={
     if(this.leftChild == null){
       return false
     }
     true
   }
+
+  /*
+    Function: hasRightChild_?
+    Parameter: n/a
+    Return: Boolean
+    Use: Returns true when the node has a right child.
+   */
 
   def hasRightChild_?(): Boolean={
     if(this.rightChild == null){
@@ -66,20 +115,27 @@ class Node[T](value: T) extends Tnode[T] {
   }
 
   /*
-  Determine if a node is a leaf
- */
+    Function: isLeaf_?
+    Parameter: n/a
+    Return: Boolean
+    Use: Returns true when the node has no children.
+   */
 
-  private def isLeaf_?(node: Node[T]): Boolean={
-    if(getLeftChild() == null && getRightChild() == null){
-      return true
-    }
-    false
+  private def isLeaf_?(): Boolean={
+    !hasLeftChild_?() && !hasRightChild_?()
   }
 
 
   /*
-    Set a node as a child node of the node
+    Function: setChild
+    Parameter:
+      childNode: type; Node[T]
+        Use: The node that has to be set as child of the node
+    Return: Unit
+    Use: Set a node as a child node of this node. When the left child position is taken
+         the node will be set as a right child.
    */
+
   override def setChild(childNode:Node[T]): Unit ={
 
     if(!hasLeftChild_?()) {  // we check if one of the children is null, if so there is a location free
@@ -90,12 +146,17 @@ class Node[T](value: T) extends Tnode[T] {
 
     }else{
       sys.error("This node already has a left and a right child") //if none of the locations are free
-      // we throw an error
     }
+    this.hasNext = true
   }
 
   /*
-    Set the parent of the node to a specific node
+    Function: setParent
+    Parameter:
+      parentNode: type; Node[T]
+        Use: The node that must be set as parent of this node.
+    Return: Unit
+    Use: Set a node as a parent node of this node. When this location is already taken an error will be thrown.
    */
 
   override def setParent(parentNode: Node[T]): Unit ={
@@ -105,6 +166,7 @@ class Node[T](value: T) extends Tnode[T] {
     }else{
       sys.error("This node already has a parent: setParent")
     }
+    this.hasParent = true
   }
 
 }
