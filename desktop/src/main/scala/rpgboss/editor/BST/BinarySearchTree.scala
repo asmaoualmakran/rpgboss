@@ -164,13 +164,19 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
     This wil be used by addValue(newValue:T) to add an new value to the tree
     the new value must be a node to be valid
    */
-  private  def addNode(newNode: Node[T]): Unit ={
+  private  def addNode(newNode: Node[T]): Unit = {
+    if (rootNode == null) {
+      initTree(newNode)
+    } else {
+
+
     val freeLoc = findTreeLocation()
-  //  newNode.setParent(newNode, freeLoc) //set the pointers to the nodes right
-  //  freeLoc.setChild(freeLoc,newNode)
+    //  newNode.setParent(newNode, freeLoc) //set the pointers to the nodes right
+    //  freeLoc.setChild(freeLoc,newNode)
     val arrayLoc = findArrayLocation()
-    treeArray.update(arrayLoc,newNode)  //TODO: moet update gebruiken om nodes toe te voegen
+    treeArray.update(arrayLoc, newNode) //TODO: moet update gebruiken om nodes toe te voegen
     // append the element to the array
+    }
   }
   /*
     NOTE: we use the def update(index:Int, element:T) to add an element to the node
@@ -184,7 +190,7 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
   def addValue(newValue:T): Unit={
     val newNode = new Node[T](newValue)
   //  println("Node created with value: ", newValue)
-    addNode(newNode)
+  //  addNode(newNode)
 
 
   }

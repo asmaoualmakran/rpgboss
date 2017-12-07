@@ -40,7 +40,7 @@ class BinarySearchTreeSpec extends UnitSpec{
     testTree.addValue(30)
     testTree.addValue(50)
     testTree.addValue(1000359)
-    testTree.printTree()
+
 
 
 

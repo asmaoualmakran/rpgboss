@@ -31,14 +31,14 @@ class Node[T](value: T) extends Tnode[T] {
  }
 
   override def getLeftChild(): Node[T]={
-    if(hasLeftChild_?()){
+    if(this.leftChild != null){
       return this.leftChild
     }
     sys.error("Node has no left child: getLeftChild()| Node")
   }
 
   override def getRightChild(): Node[T]={
-    if(hasRightChild_?()){
+    if(this.rightChild != null){
       return this.rightChild
     }
     sys.error("Node has no right child: getRightChild()| Node")
@@ -52,17 +52,17 @@ class Node[T](value: T) extends Tnode[T] {
   }
 
   def hasLeftChild_?(): Boolean={
-    if(getLeftChild() == null){
-      return true
+    if(this.leftChild == null){
+      return false
     }
-    false
+    true
   }
 
   def hasRightChild_?(): Boolean={
-    if(getRightChild() == null){
-      return true
+    if(this.rightChild == null){
+      return false
     }
-    false
+    true
   }
 
   /*
