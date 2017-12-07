@@ -23,7 +23,7 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
    */
   private var treeArray = Array.ofDim[Node[T]](size)     // the tree contains nodes of type Node[T]
   private val rootIndex = 0
-  private val rootNode = treeArray(rootIndex)
+  private var rootNode = treeArray(rootIndex)
 
   def printTree(): Unit ={
     for(i <- 0 to treeArray.length-1){
@@ -42,7 +42,8 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
    */
 
   private def initTree(node:Node[T]): Unit={
-    treeArray(rootIndex) = node
+    treeArray.update(rootIndex, node)
+    rootNode = node                 // update the rootnode
   }
 
   /*
@@ -165,16 +166,21 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
     the new value must be a node to be valid
    */
   private  def addNode(newNode: Node[T]): Unit = {
+    println("addNode", newNode.getValue())
     if (rootNode == null) {
+      println("root == null", rootNode)
       initTree(newNode)
+
     } else {
 
 
     val freeLoc = findTreeLocation()
-    //  newNode.setParent(newNode, freeLoc) //set the pointers to the nodes right
-    //  freeLoc.setChild(freeLoc,newNode)
+      newNode.setParent(freeLoc) //set the pointers to the nodes right
+      freeLoc.setChild(newNode)
+
     val arrayLoc = findArrayLocation()
     treeArray.update(arrayLoc, newNode) //TODO: moet update gebruiken om nodes toe te voegen
+      println("node updated")
     // append the element to the array
     }
   }
@@ -189,8 +195,8 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
    */
   def addValue(newValue:T): Unit={
     val newNode = new Node[T](newValue)
-  //  println("Node created with value: ", newValue)
-  //  addNode(newNode)
+    println("Node created with value: ", newValue)
+    addNode(newNode)
 
 
   }
