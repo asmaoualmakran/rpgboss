@@ -121,7 +121,7 @@ class Node[T](value: T) extends Tnode[T] {
     Use: Returns true when the node has no children.
    */
 
-  private def isLeaf_?(): Boolean={
+  def isLeaf_?(): Boolean={
     !hasLeftChild_?() && !hasRightChild_?()
   }
 
