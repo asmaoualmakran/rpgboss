@@ -185,11 +185,27 @@ object MapViewTools {
   // Draw a single tile
   case object Pencil extends MapViewTool {
     val name = "Pencil"
+    val NumberOfDecorations = 5
+    var iteration = 0
+
     def onMouseDown(
       vs: MapViewState, tCodes: Array[Array[Array[Byte]]],
       layer: MapLayers.Value,
       x1: Int, y1: Int) = {
       import MapLayers._
+
+
+      // Testing purposes:
+      val foo = new RandomDecorations
+
+      if(NumberOfDecorations == iteration){
+        iteration -= NumberOfDecorations
+      } else {
+        println(s"[object Pencil] placed decoration at ($x1, $y1)")
+        iteration += 1
+        foo.placeDecorations(vs, tCodes)
+      }
+
 
       mapOfArrays(vs.nextMapData).get(layer).map { layerAry =>
         for (

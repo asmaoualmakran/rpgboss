@@ -450,6 +450,7 @@ class MapEditor(
     yTile0: Float,
     vs: MapViewState): Option[(Boolean, MouseFunction, MouseFunction)] = {
 
+    repaintAll()
     if (!vs.mapMeta.withinBounds(xTile0, yTile0))
       return None
 
