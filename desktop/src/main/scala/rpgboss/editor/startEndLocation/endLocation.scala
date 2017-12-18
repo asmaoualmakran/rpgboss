@@ -12,24 +12,21 @@ class endLocation(vs: MapViewState, x: Int, y: Int, totalEvents: Int) {
   /*
   Makes an end Location,
   This is an event that terminates the game
-  It exists in two states,
-  first one:
+  It exists in two states:
+  - First one:
   If the character enters the state and presses the button:
   menu opens
-  second one:
+  - Second one:
   If the character enters the state, it terminates the game
 
    */
-
-
-
-
-
-
   var cond: Array[Condition] = Array()
   var spriteName : String = "sys/!object.png"
-  var spriteIx : Int = 2
-  var sprite: SpriteSpec = SpriteSpec(name = spriteName, spriteIndex = spriteIx)
+
+  /*state 1 */
+
+  var sprite1Ix : Int = 2
+  var sprite1: SpriteSpec = SpriteSpec(name = spriteName, spriteIndex = sprite1Ix)
   var height: Int = EventHeight.UNDER.id
   var affixDirection: Boolean = false
 
@@ -39,11 +36,13 @@ class endLocation(vs: MapViewState, x: Int, y: Int, totalEvents: Int) {
   var evcmd = new EventCmd {
     override def sections: Array[CodeSection] = {singleCall("game.callMenu")}
   }
-  var cmds: Array[EventCmd] = Array(evcmd)
+  var cmds1: Array[EventCmd] = Array(evcmd)
 
-  val state1 : RpgEventState = RpgEventState(conditions = cond, sprite = Some(sprite), height = height, affixDirection = affixDirection, trigger = trigger, animationType = animationType, runOnceThenIncrementState = runOnceThenIncrementState,cmds = cmds  )
-  spriteIx = 0
-  sprite = SpriteSpec(name = spriteName, spriteIndex = spriteIx)
+  val state1 : RpgEventState = RpgEventState(conditions = cond, sprite = Some(sprite1), height = height, affixDirection = affixDirection, trigger = trigger, animationType = animationType, runOnceThenIncrementState = runOnceThenIncrementState,cmds = cmds1  )
+
+  /* State 2 */
+  var sprite2Ix = 0
+  var sprite2 = SpriteSpec(name = spriteName, spriteIndex = sprite2Ix)
   evcmd = new EventCmd {
     var conpar = new IntParameter(constant = 0, globalVariable = "finished")
     var conpar2 = new IntParameter(constant = totalEvents)
@@ -72,8 +71,8 @@ class endLocation(vs: MapViewState, x: Int, y: Int, totalEvents: Int) {
       buf.toArray
     }
   }
-  cmds = Array(evcmd)
-  val state2 : RpgEventState = RpgEventState(conditions = cond, sprite = Some(sprite), height = height, affixDirection = affixDirection, trigger = trigger, animationType = animationType, runOnceThenIncrementState = runOnceThenIncrementState,cmds = cmds  )
+  var cmds2 = Array(evcmd)
+  val state2 : RpgEventState = RpgEventState(conditions = cond, sprite = Some(sprite2), height = height, affixDirection = affixDirection, trigger = trigger, animationType = animationType, runOnceThenIncrementState = runOnceThenIncrementState,cmds = cmds2  )
 
   val id = vs.mapMeta.lastGeneratedEventId + 1
   val xloc = x + 0.5f
