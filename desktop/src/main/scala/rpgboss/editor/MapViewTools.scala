@@ -195,13 +195,11 @@ object MapViewTools {
       import MapLayers._
 
 
-      // Testing purposes:
       val foo = new RandomDecorations
 
       if(NumberOfDecorations == iteration){
         iteration -= NumberOfDecorations
       } else {
-        println(s"[object Pencil] placed decoration at ($x1, $y1)")
         iteration += 1
         foo.placeDecorations(vs, tCodes)
       }
