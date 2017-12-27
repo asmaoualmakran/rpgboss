@@ -409,16 +409,12 @@ class MapEditor(
             enabled = projectPanel.eventOnClipboard.isDefined
           }
         }
-        contents += new MenuItem(Action(getMessage("Place_Random_Decorations") + "...")
-        {
 
-          println("RANDOM DECORATIONS")
-
-          val foo = new RandomDecorations(projectPanel, sm, tileSelector)
-          foo.placeDecorations(vs)
+        contents += new MenuItem(Action(getMessage("Place_Random_Decorations") + "...") {
+          val RanDec = new RandomDecorations(projectPanel, sm, tileSelector, vs)
+          RanDec.placeDecorations(vs)
           repaintAll()
-
-          }
+        }
         )
 
 
