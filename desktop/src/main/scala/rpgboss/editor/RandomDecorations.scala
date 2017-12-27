@@ -2,64 +2,94 @@ package rpgboss.editor
 
 import rpgboss.model.resource.RpgMap
 import rpgboss.editor.MapViewTools.Pencil
-import rpgboss.player.MapAndAssets
-import rpgboss.editor.MapLayers._
-import rpgboss.model.DirectionMasks
-import rpgboss.model.DirectionMasks.NONE
+import rpgboss.editor.imageset.selector.TabbedTileSelector
 
 
-class RandomDecorations {
+class RandomDecorations (projectPanel: ProjectPanel,
+                         sm: StateMaster,
+                         tileSelector: TabbedTileSelector)
+  extends MapEditor (projectPanel, sm, tileSelector){
 
   val DecorationList: List[List[Int]] =
     List(
       List(1, 4, 5), List(1, 1, 4), List(1, 6, 9), List(1, 5, 9), List(1, 6, 10),
       List(1, 3, 6), List(3, 0, 9), List(4, 2, 3), List(4, 5, 0), List(4, 4, 3),
       List(4, 0, 2), List(4, 1, 14)
-  )
+    )
+
+  val NumberOfDecorations = 5
+  var iteration = 0
 
 
   def getRandomLocation(): List[Int] = {
 
     val startX = 0: Int
-    val endX  = RpgMap.initXSize: Int
+    val endX = RpgMap.initXSize: Int
 
     val startY = 0: Int
-    val endY  = RpgMap.initYSize: Int
+    val endY = RpgMap.initYSize: Int
 
     val rnd = new scala.util.Random
     val x = startX + rnd.nextInt((endX - startX) + 1)
     val y = startY + rnd.nextInt((endY - startY) + 1)
-    return List(x, y)
+
+    def withinBounds(x: Int, y: Int) = {
+      x < endX && y < endY && x >= 0 && y >= 0
+    }
+
+    if (withinBounds(x, y)) {
+      List(x, y)
+    } else {
+      getRandomLocation()
+    }
 
   }
 
 
-  def placeDecorations(vs: MapViewState,
-                       tCodes: Array[Array[Array[Byte]]]): Unit = {
-    val pos = getRandomLocation(): List[Int]
-    val x = pos.head
-    val y = pos.tail.head
+  def placeDecorations(vs: MapViewState): Unit = {
 
-    // Grab random decoration from list
-    val rnd = new scala.util.Random
-    val decoNmbr = rnd.nextInt(DecorationList.length)
-    val deco = DecorationList(decoNmbr)
+    if (NumberOfDecorations == iteration) {
+      iteration -= NumberOfDecorations
+    } else {
+      iteration += 1
 
-    val byte_1 = deco.head
-    val byte_2 = deco.tail.head
-    val byte_3 = deco.tail.tail.head
+      // Get random x and y
+      val pos = getRandomLocation(): List[Int]
+      val x: Int = pos.head
+      val y: Int = pos.tail.head
 
-    // Grab correct tile code
-    val newTileCode = Array(Array(Array(
-      byte_1.asInstanceOf[Byte], byte_2.asInstanceOf[Byte], byte_3.asInstanceOf[Byte])))
-    Pencil.onMouseDown(vs, newTileCode, MapLayers.Top, x ,y)
-    println(s"Placed decoration at ($x, $y)")
-    // tCodes specifies which tile will be drawn
-    // -> Find out the tile representation and how to select a random tile
+      // Grab random decoration from list
+      val rnd = new scala.util.Random
+      val decorationNumber = rnd.nextInt(DecorationList.length)
+      val decoration = DecorationList(decorationNumber)
+
+      // Grab correct tile code
+      val int1 = decoration.head
+      val int2 = decoration.tail.head
+      val int3 = decoration.tail.tail.head
+
+      val tCode = Array(Array(Array(
+        int1.asInstanceOf[Byte], int2.asInstanceOf[Byte], int3.asInstanceOf[Byte])))
+
+      // Decorations belong on the top layer
+      val selectedLayer = MapLayers.Top
+
+      vs.begin()
+
+      val changedRegion =
+        Pencil.onMouseDown(vs, tCode, selectedLayer, x, y)
+      repaintRegion(changedRegion)
+
+      commitVS(vs)
+      println(s"Placed decoration $decoration at ($x, $y)")
+
+      placeDecorations(vs)
+    }
+
 
   }
-
 }
+
 
 /* Decoration Tile Code Library
 * 1 4 5  ~  hatchet in wood stump

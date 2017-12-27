@@ -409,8 +409,20 @@ class MapEditor(
             enabled = projectPanel.eventOnClipboard.isDefined
           }
         }
+        contents += new MenuItem(Action(getMessage("Place_Random_Decorations") + "...")
+        {
 
-        contents += new Separator
+          println("RANDOM DECORATIONS")
+
+          val foo = new RandomDecorations(projectPanel, sm, tileSelector)
+          foo.placeDecorations(vs)
+          repaintAll()
+
+          }
+        )
+
+
+          contents += new Separator
 
         contents += new MenuItem(Action(getMessage("Set_Start_Location")) {
           def repaintMapLoc(l: MapLoc) =
@@ -450,7 +462,6 @@ class MapEditor(
     yTile0: Float,
     vs: MapViewState): Option[(Boolean, MouseFunction, MouseFunction)] = {
 
-    repaintAll()
     if (!vs.mapMeta.withinBounds(xTile0, yTile0))
       return None
 
@@ -461,6 +472,7 @@ class MapEditor(
     }.map(_._1)
 
     val button = e.peer.getButton()
+
 
     // If the event layer is currently selected
     if (selectedLayer == Evt) {
@@ -528,6 +540,7 @@ class MapEditor(
         Some((true, onDrag _, onDragStop _))
       } else None
     }
+
   }
 
   //--- REACTIONS ---//
