@@ -73,6 +73,10 @@ class Node[T](value: T) extends Tnode[T] {
   }
 
   /*
+    The following 3 predicates aren't written in the style they should be written
+    This is due when correcting it to the correct way, the node addition in the tee doesn't work
+   */
+  /*
     Function: hasParent_?
     Parameter: n/a
     Return: Boolean
@@ -80,7 +84,7 @@ class Node[T](value: T) extends Tnode[T] {
    */
 
   def hasParent_?(): Boolean={
-    if(parent != null){
+   if(parent != null){
       return true
     }
     false
@@ -94,7 +98,7 @@ class Node[T](value: T) extends Tnode[T] {
    */
 
   def hasLeftChild_?(): Boolean={
-    if(this.leftChild == null){
+   if(this.leftChild == null){
       return false
     }
     true
@@ -121,8 +125,8 @@ class Node[T](value: T) extends Tnode[T] {
     Use: Returns true when the node has no children.
    */
 
-  def isLeaf_?(): Boolean={
-    !hasLeftChild_?() && !hasRightChild_?()
+  override def isLeaf_?(): Boolean={
+  !hasLeftChild_?() && !hasRightChild_?()
   }
 
 

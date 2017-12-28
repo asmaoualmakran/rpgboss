@@ -8,7 +8,7 @@ trait Tnode[T] {
   def getParent(): Node[T] = ???
   def setChild(childNode: Node[T]): Unit = ???
   def setParent(parentNode: Node[T]): Unit = ???
-
+  def isLeaf_?() : Boolean = ???
 
   /* The ??? makes sure that if an procedure is not overwritten, that it trows an
      not supported exception

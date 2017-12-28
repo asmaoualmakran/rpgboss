@@ -16,7 +16,7 @@ import scala.collection.mutable.Queue
 
 class BinarySearchTree[T](size: Int) extends Tnode[T]{
 
-
+  val numberOfNodes = this.size
   private var treeArray = Array.ofDim[Node[T]](size)  //The array representing the tree
   private val rootIndex = 0
   private var rootNode = treeArray(rootIndex)
@@ -34,11 +34,24 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
         print(0," ")
       }else{
         var node = treeArray(i)
-        print(node.getValue()," ")
+        print(node.getValue())
       }
     }
   }
 
+  /*
+    Function: isNull_?
+    Parameter: n/a
+    Return: Boolean
+    User: Ask whether the tree is empty
+   */
+
+  def isNull_?(): Boolean={
+    if(rootNode == null){
+      return true
+    }
+    return false
+  }
 
   /*
     Function: initTree
