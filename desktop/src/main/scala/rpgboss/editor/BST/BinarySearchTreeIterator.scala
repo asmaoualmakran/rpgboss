@@ -6,9 +6,8 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
   val size = this.BST.numberOfNodes
   val root = this.BST.getRoot()
   var stack = new Stack [Node[T]]()
-                   // initialize the stack (needed to check if all elements are passed)
 
-  private def initStack(): Unit ={
+  def initStack(): Unit ={
     if(!BST.isNull_?()){
       if(stack.isEmpty) {       // can only initialize the stack when it is empty and the tree had a root => not in use
         stack.push(root)
@@ -52,26 +51,28 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
 
   //Going to loop over the tree, and retuns only one child at a time (breath first)
   override def next(): Node[T]={
-    if(endOfTree_?()){
-      initStack()               // end of the tree is reached, reinitialise the stack for reuse
-      return sys.error("EOF tree is reached")
-    }else if(root.isLeaf_?()){
-      stack.pop()               // clear the stack, this will be needed to be initialized after to be reused
-      return root               // the root is the only node contained by the tree this will be returned
-    }else{                      // in this case the tree is not null, any next node may be returned
+    if(stack.isEmpty){
+      return sys.error("EOF tree is reached, reinitialize the stack")
+    }else if(stack.head.isLeaf_?()){
+      val top = stack.head
+      stack.pop()
+      return top
+    }else{
       val top = stack.head
       stack.pop()
       stack.push(getNextRight(top), getNextLeft(top))
       return top
     }
   }
-/*
-  override def nextLeaf(): Node[T] ={
-    if(endOfTree_?()){
-      return sys.error("EOF tree is reached")
-    }
 
+  override def nextLeaf(): Node[T] ={
+
+    var node = next()
+    while (!node.isLeaf_?()){
+      node = next()
+    }
+    return node
   }
 
-*/
+
 }

@@ -16,6 +16,7 @@ import scala.collection.mutable.Queue
 
 class BinarySearchTree[T](size: Int) extends Tnode[T]{
 
+
   val numberOfNodes = this.size
   private var treeArray = Array.ofDim[Node[T]](size)  //The array representing the tree
   private val rootIndex = 0
@@ -34,7 +35,7 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
         print(0," ")
       }else{
         var node = treeArray(i)
-        print(node.getValue())
+        print(node.getValue()," ")
       }
     }
   }
@@ -215,10 +216,9 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
   def addValue(newValue:T): Unit={
     val newNode = new Node[T](newValue)
     addNode(newNode)
-    printTree()
+  //  printTree()
 
   }
-
 
 
 }

@@ -37,7 +37,7 @@ class BinarySearchTreeSpec extends UnitSpec{
     tree.addValue(555)
     tree.addValue(306)
     tree.getRoot()
-}
+  }
 
 
 }
