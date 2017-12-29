@@ -12,7 +12,7 @@ class BinarySearchTreeSpec extends UnitSpec{
     BinarySearchTree tests
     Author: Asma Oualmakran
    */
- 
+
   "A BinarySearchTree" should "return null" in{
     val emptyTree = new BinarySearchTree[Int](50)
     emptyTree.getRoot()

@@ -1,62 +1,33 @@
 package rpgboss.editor.BST
-import scala.collection.mutable.ListBuffer
-import scala.swing.Container
-/*
+import scala.collection.mutable.Stack
+
 class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterator[T]{
 
   val size = this.BST.numberOfNodes
   val root = this.BST.getRoot()
-  var stack = List(root)
+  var stack = new Stack [Node[T]]()
+                   // initialize the stack (needed to check if all elements are passed)
 
-  /*    override def hasNext_? (node:Node[_]): Boolean ={
-      return node.hasNext
-
-    }
-
-    override def getNext(node: Node[_]): Node[_] = {
-      if(hasNext_?(node)) {
-        if (node.hasLeftChild_?()) {
-          return node.leftChild
-        } else {
-          return node.rightChild
-        }
-      }
-      return null
-    }
-
-    /*
-    It updateds the leafsList
-     */
-
-    override def getLeafs(): Node[_] ={
-      if(BST == null){
-        sys.error("Can not iterate on an empty tree")
+  private def initStack(): Unit ={
+    if(!BST.isNull_?()){
+      if(stack.isEmpty) {       // can only initialize the stack when it is empty and the tree had a root => not in use
+        stack.push(root)
       }else{
-        val root = BST.getRoot()
-        if(root.isLeaf_?()) {
- //         leafsList += root
-            return root
-        }else{
-          def loop(node: Node[_]): Unit ={
-
-          }
-        }
+        sys.error("Can not initialize stack, it contains element")
       }
-
+    }else{
+      sys.error("Can not initialize stack, root = null.")
     }
-
-    /*
-    override def getNode(BST: BinarySearchTree[_]): Node[_]={
-
-    }
-
-    */
-    */
-  /* Checken of de boom leeg is of niet (alle nodes overlopen)
-  override def hasNext_? () : Boolean ={
-
   }
-  */
+
+
+ override def endOfTree_?(): Boolean ={
+    if(stack.isEmpty){
+      return true
+    }
+    else false
+  }
+
   override def getNextLeft(node: Node[T]): Node[T]={
       if(node.isLeaf_?()){
         return null
@@ -77,20 +48,30 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
       }
   }
 
-  object LeafIterator{
 
-  }
 
-  //Going to loop over the tree, and retuns only one child at a time
+  //Going to loop over the tree, and retuns only one child at a time (breath first)
   override def next(): Node[T]={
-    if ()
-    if (root.isLeaf_?()){
-      return root               // the stack stays empty
-    }else{
-      def loop(): Node[T]={
-
-      }
+    if(endOfTree_?()){
+      initStack()               // end of the tree is reached, reinitialise the stack for reuse
+      return sys.error("EOF tree is reached")
+    }else if(root.isLeaf_?()){
+      stack.pop()               // clear the stack, this will be needed to be initialized after to be reused
+      return root               // the root is the only node contained by the tree this will be returned
+    }else{                      // in this case the tree is not null, any next node may be returned
+      val top = stack.head
+      stack.pop()
+      stack.push(getNextRight(top), getNextLeft(top))
+      return top
     }
   }
-}
+/*
+  override def nextLeaf(): Node[T] ={
+    if(endOfTree_?()){
+      return sys.error("EOF tree is reached")
+    }
+
+  }
+
 */
+}
