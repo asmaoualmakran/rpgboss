@@ -1,5 +1,4 @@
 package rpgboss.editor.BST
-
 import scala.collection.mutable.Queue
 
 /*
