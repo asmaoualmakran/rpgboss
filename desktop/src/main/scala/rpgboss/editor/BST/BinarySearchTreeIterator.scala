@@ -3,9 +3,9 @@ import scala.collection.mutable.Stack
 
 class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterator[T]{
 
-  val size = this.BST.numberOfNodes
-  val root = this.BST.getRoot()
-  var stack = new Stack [Node[T]]()
+
+  private val root = this.BST.getRoot()
+  private var stack = new Stack [Node[T]]()
 
   def initStack(): Unit ={
     if(!BST.isNull_?()){
