@@ -16,12 +16,12 @@ package rpgboss.editor.map_generator
 
 case class Container(x:Int, y:Int, h:Int, w:Int) extends Tcontainer {
 
-  override val left_bound  = this.x
-  override val upper_bound = this.y
-  override val lower_bound = this.h
-  override val right_bound = this.w
-  override val width = right_bound - left_bound
-  override val height = lower_bound - upper_bound
+  val left_bound  = this.x
+  val upper_bound = this.y
+  val lower_bound = this.h
+  val right_bound = this.w
+  val width = right_bound - left_bound
+  val height = lower_bound - upper_bound
 
 
   /*
