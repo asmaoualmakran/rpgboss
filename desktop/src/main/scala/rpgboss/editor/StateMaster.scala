@@ -37,7 +37,7 @@ case class MapState(map: RpgMap,
 /**
  * This class manages the dirtiness and saving of all the open maps.
  */
-class StateMaster(mainPanel: MainPanel, private var proj: Project) {
+class StateMaster(mainPanel: MainPanel, var proj: Project) {
   import Dirtiness._
 
   val assetCache = new AssetCache(proj)

@@ -10,25 +10,31 @@ import rpgboss.editor.uibase._
 import rpgboss.editor.misc._
 import rpgboss.editor.misc.GraphicsUtils._
 import com.typesafe.scalalogging.slf4j.LazyLogging
+
 import scala.math._
 import scala.swing._
 import scala.swing.event._
 import javax.imageio._
-import java.awt.{ BasicStroke, AlphaComposite, Color }
+import java.awt.{AlphaComposite, BasicStroke, Color}
 import java.awt.geom.Line2D
 import java.awt.event.MouseEvent
+
 import rpgboss.model.event.RpgEvent
 import rpgboss.editor.dialog.EventDialog
 import java.awt.image.BufferedImage
+
 import scala.collection.mutable.Buffer
 import javax.swing.event._
 import javax.swing.KeyStroke
 import java.awt.event.KeyEvent
 import java.awt.event.InputEvent
+
 import rpgboss.editor.imageset.selector.TabbedTileSelector
 import javax.swing.ImageIcon
+
 import rpgboss.editor.dialog.EventInstanceDialog
 import rpgboss.editor.Internationalized._
+import rpgboss.editor.randec._
 import rpgboss.editor.util.MouseUtil
 
 /**
@@ -411,8 +417,8 @@ class MapEditor(
         }
 
         contents += new MenuItem(Action(getMessage("Place_Random_Decorations") + "...") {
-          val RanDec = new RandomDecorations(projectPanel, sm, tileSelector, vs)
-          RanDec.placeDecorations(vs)
+          val RanDec = new placeDecoration(vs)
+          RanDec.placeDecorations()
           repaintAll()
         }
         )
