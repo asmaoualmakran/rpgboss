@@ -14,11 +14,11 @@ class BinarySearchTreeSpec extends UnitSpec{
    */
 
   "A BinarySearchTree" should "return null" in{
-    val emptyTree = new BinarySearchTree[Int](50)
+    val emptyTree = new BinarySearchTree[Int](5)
     emptyTree.getRoot()
   }
   it should "add a node to the BinarySearchTree with a given value" in{
-    val testTree = new BinarySearchTree[Int](50)
+    val testTree = new BinarySearchTree[Int](5)
     testTree.addValue(2)
     testTree.addValue(30)
     testTree.addValue(50)
@@ -32,7 +32,7 @@ class BinarySearchTreeSpec extends UnitSpec{
   }
 
   it should "return the root value" in{
-    val tree = new BinarySearchTree[Int](50)
+    val tree = new BinarySearchTree[Int](5)
     tree.addValue(53)
     tree.addValue(555)
     tree.addValue(306)

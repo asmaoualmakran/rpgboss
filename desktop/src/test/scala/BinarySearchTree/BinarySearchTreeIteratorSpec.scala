@@ -44,7 +44,7 @@ class BinarySearchTreeIteratorSpec extends UnitSpec{
 
   }
   it should " Give the next element in the correct order" in {
-    val BST = new BinarySearchTree[Int](7)
+    val BST = new BinarySearchTree[Int](5)
     BST.addValue(2)
     BST.addValue(30)
     BST.addValue(50)
@@ -76,7 +76,7 @@ class BinarySearchTreeIteratorSpec extends UnitSpec{
   }
 
   it should "Return the next leaf" in {
-    val BST = new BinarySearchTree[Int](7)
+    val BST = new BinarySearchTree[Int](5)
     BST.addValue(2)
     BST.addValue(30)
     BST.addValue(50)

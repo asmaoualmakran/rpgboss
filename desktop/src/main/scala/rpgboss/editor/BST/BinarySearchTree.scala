@@ -1,6 +1,6 @@
 package rpgboss.editor.BST
 import scala.collection.mutable.Queue
-
+import scala.math
 /*
   Author: Asma Oualmakran
   Class: BinarySearchTree
@@ -12,11 +12,21 @@ import scala.collection.mutable.Queue
   Use: Create a unordered binary search tree
  */
 
+class BinarySearchTree[T](height: Int) extends Tnode[T]{
 
-class BinarySearchTree[T](size: Int) extends Tnode[T]{
+  /*
+    Function: calcSize
+    Parameters: n/a
+    Return: Int
+    Use: Calculate the number of nodes needed to create the BST using it's height.
+   */
+  def calcSize(): Int={
+    val result = (math.pow(2, (height-1)))-1
+    return result.toInt
+  }
 
-
-  val numberOfNodes = this.size
+  val size = calcSize()
+  val numberOfNodes = size
   private var treeArray = Array.ofDim[Node[T]](size)  //The array representing the tree
   private val rootIndex = 0
   private var rootNode = treeArray(rootIndex)
@@ -25,7 +35,7 @@ class BinarySearchTree[T](size: Int) extends Tnode[T]{
     Function: printTree
     Parameters: n/a
     Return: Unit
-    User: Print the tree array.
+    Use: Print the tree array.
    */
 
   def printTree(): Unit ={

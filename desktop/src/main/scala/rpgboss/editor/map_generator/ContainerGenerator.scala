@@ -2,13 +2,32 @@ package rpgboss.editor.map_generator
 import scala.collection.mutable.{MutableList, Stack}
 import scala.util.Random
 
+
 /*
-The minimum size is used to prevent the fields to become too small and unplayable
+  Author: Asma Oualmakran
+  Class: ContainerGenerator
+  Parameters:
+    startContainer: Container
+      Use: The first container, the following containers will be calculated using the startContainer.
+    seed: Int
+      Use: The seed for the random number, used for splitting the containers.
+    minimumSize: Int
+      Use: The minimum size that the container needs to be, this will prevent generation of
+           of containers that are too small to be playable.
+  User: Generate the following containers, calculations are based on the passed startContainer.
  */
+
 class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int){
 
   private var stack = new Stack [Container]()
   val random = new Random(seed)
+
+  /*
+    Function: initStack
+    Parameters: n/a
+    Return: n/a
+    Use: Initialize the stack, used to keep the last generated containers
+   */
 
   private def initStack(): Unit={
     if(stack.isEmpty){
@@ -20,12 +39,27 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int){
 
   initStack()  // initialize the stack
 
+  /*
+    Function: clearStack
+    Parameters: n/a
+    Return: n/a
+    Use: Clear the stack
+   */
+
   def clearStack(): Unit={
     if(stack.isEmpty){
       sys.error("Stack is already empty")
     }
     stack.clear()
   }
+
+  /*
+    Function: largeEnough_?
+    Parameters: container: Container
+      Use: The container that needs to be checked.
+    Return: Boolean
+    Use: A boolean to check if the container is large enough after splitting.
+   */
 
   private def largeEnough_?(container: Container): Boolean={
     if((((container.height/2)*container.width) < this.minimumSize) || ((container.height*(container.width/2)) < this.minimumSize)){
@@ -34,10 +68,15 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int){
     return true
   }
 
-  /*
-  Before starting to split the container, first check whether it's large enough to split
-   */
- private def split_container(container: Container): Tuple2[Container, Container] = {
+ /*
+   Function: splitContainer
+   Parameter: container: Container
+     Use: Split a container in 2, splitting direction is chosen random.
+   Return: Tuple2[Container, Container]
+   Use: Split a container in 2 new containers.
+  */
+
+ private def splitContainer(container: Container): Tuple2[Container, Container] = {
 
    if(largeEnough_?(container)) {
 
@@ -60,6 +99,12 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int){
    return sys.error("Container is not large enough to split")
   }
 
+  /*
+    Function: next
+    Parameter: n/a
+    Return: List[Container]
+    Use: Calculate the following set of containers.
+   */
 
  def next(): List[Container]={
     if(stack.isEmpty){
@@ -67,7 +112,7 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int){
     }else{
       val result: MutableList[Container] = MutableList()
       while (!stack.isEmpty){
-        val newContainers: Tuple2[Container,Container] = split_container(stack.head)
+        val newContainers: Tuple2[Container,Container] = splitContainer(stack.head)
         stack.pop()
         result.+: (newContainers._1)   // add the new elements at the front of the list -> we create a reversed list
         result.+: (newContainers._2)
