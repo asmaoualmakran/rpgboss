@@ -3,9 +3,11 @@ package rpgboss.editor.randec
 import rpgboss.editor.MapViewTools.Pencil
 import rpgboss.editor.{MapLayers, MapViewState}
 
-class placeDecoration(vs: MapViewState) extends randomDecorations() {
+class placeDecoration(vs: MapViewState) extends randomDecorations(){
 
-  override def placeDecorations(): Unit = {
+  override def placeDecorations(nod: Int): Unit = {
+
+    NumberOfDecorations = nod
 
     if (NumberOfDecorations == iteration) {
       iteration -= NumberOfDecorations
@@ -41,7 +43,7 @@ class placeDecoration(vs: MapViewState) extends randomDecorations() {
       println(s"Placed decoration ($int1, $int2, $int3) at ($x, $y)")
 
       // Repeat
-      placeDecorations()
+      placeDecorations(nod)
     }
   }
 

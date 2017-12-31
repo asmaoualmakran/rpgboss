@@ -15,10 +15,11 @@ class randomDecorations(){
       List(4, 4, 2),  List(4, 1, 13), List(4, 2, 13)
     )
 
-  val NumberOfDecorations:Int = 30
-  protected var iteration:Int  = 0
+  protected var NumberOfDecorations: Int = 0
+  protected var iteration: Int  = 0
+  val maxDecorations: Int = 3000
 
-  def placeDecorations(): Unit = ???
+  def placeDecorations(nod: Int): Unit = ???
   def getRandomLocation(): List[Int] = ???
 
 

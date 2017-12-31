@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent
 
 import rpgboss.model.event.RpgEvent
 import rpgboss.editor.dialog.EventDialog
+import rpgboss.editor.dialog._
 import java.awt.image.BufferedImage
 
 import scala.collection.mutable.Buffer
@@ -417,9 +418,22 @@ class MapEditor(
         }
 
         contents += new MenuItem(Action(getMessage("Place_Random_Decorations") + "...") {
-          val RanDec = new placeDecoration(vs)
-          RanDec.placeDecorations()
-          repaintAll()
+
+          def onOk(nod: Int) ={
+            val RanDec = new placeDecoration(vs)
+            RanDec.placeDecorations(nod)
+            repaintAll()
+          }
+
+          val dialog =
+            new DecorationsDialog(
+              projectPanel.mainP.topWin,
+              sm,
+              onOk = onOk)
+
+
+          dialog.open()
+
         }
         )
 
