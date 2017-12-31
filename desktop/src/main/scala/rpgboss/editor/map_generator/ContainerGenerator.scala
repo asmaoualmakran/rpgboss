@@ -1,11 +1,11 @@
 package rpgboss.editor.map_generator
-import scala.collection.mutable.Stack
+import scala.collection.mutable.{MutableList, Stack}
 import scala.util.Random
 
 /*
 The minimum size is used to prevent the fields to become too small and unplayable
  */
-class ContainerGenerator (startContainer: Container, seed:Int, minimumSize: Int) extends Tcontainer{
+class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int){
 
   private var stack = new Stack [Container]()
   val random = new Random(seed)
@@ -19,6 +19,13 @@ class ContainerGenerator (startContainer: Container, seed:Int, minimumSize: Int)
   }
 
   initStack()  // initialize the stack
+
+  def clearStack(): Unit={
+    if(stack.isEmpty){
+      sys.error("Stack is already empty")
+    }
+    stack.clear()
+  }
 
   private def largeEnough_?(container: Container): Boolean={
     if((((container.height/2)*container.width) < this.minimumSize) || ((container.height*(container.width/2)) < this.minimumSize)){
@@ -54,18 +61,22 @@ class ContainerGenerator (startContainer: Container, seed:Int, minimumSize: Int)
   }
 
 
-  def next(): List[Container]={
+ def next(): List[Container]={
     if(stack.isEmpty){
       sys.error("Stack is empty no next container to be calculated")
     }else{
-      val result: List[Container] = List()
+      val result: MutableList[Container] = MutableList()
       while (!stack.isEmpty){
         val newContainers: Tuple2[Container,Container] = split_container(stack.head)
         stack.pop()
-        result.::(newContainers._1)   // add the new elements at the front of the list -> we create a reversed list
-        result.::(newContainers._2)
+        result.+: (newContainers._1)   // add the new elements at the front of the list -> we create a reversed list
+        result.+: (newContainers._2)
       }
-      
+
+      for(i <- 0 to result.length){   // push all the new containers back on the stack to initialize the next iteration
+        stack.push(result(i))
+      }
+      return result.toList            // Return an immutable list as result, mutable data structure is not needed after the result is built
     }
   }
 
