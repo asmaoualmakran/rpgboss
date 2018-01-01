@@ -1,10 +1,12 @@
 package BinarySearchTree
 
 
+import org.scalatest.prop.TableDrivenPropertyChecks
+import org.scalatest.{FlatSpec, Matchers}
 import rpgboss.editor.BST.BinarySearchTree
-import rpgboss.editor.UnitSpec
 
-class BinarySearchTreeSpec extends UnitSpec{
+
+class BinarySearchTreeSpec extends FlatSpec with Matchers with TableDrivenPropertyChecks{
 
 
 
@@ -19,11 +21,18 @@ class BinarySearchTreeSpec extends UnitSpec{
   }
   it should "add a node to the BinarySearchTree with a given value" in{
     val testTree = new BinarySearchTree[Int](5)
-    testTree.addValue(2)
-    testTree.addValue(30)
-    testTree.addValue(50)
-    testTree.addValue(1000359)
-
+    val nodeValues =
+      Table(
+        ("node values"),
+        ("2"),
+        ("30"),
+        ("50"),
+        ("100")
+      )
+    forAll(nodeValues){(node: String) =>
+      val nodeVal = node.toInt
+      testTree.addValue(nodeVal)
+    }
   }
 
   it should " should return true when the root node is empty" in{
@@ -33,9 +42,19 @@ class BinarySearchTreeSpec extends UnitSpec{
 
   it should "return the root value" in{
     val tree = new BinarySearchTree[Int](5)
-    tree.addValue(53)
-    tree.addValue(555)
-    tree.addValue(306)
+    val nodeValues =
+      Table(
+        ("node values"),
+        ("53"),
+        ("555"),
+        ("306"),
+        ("100"),
+        ("50")
+      )
+    forAll(nodeValues){(node: String) =>
+      val nodeVal = node.toInt
+      tree.addValue(nodeVal)
+    }
     tree.getRoot()
   }
 

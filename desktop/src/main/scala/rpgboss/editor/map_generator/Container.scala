@@ -35,10 +35,7 @@ case class Container(x:Int, y:Int, h:Int, w:Int) extends Tcontainer {
     Return: Tuple2[Int, Int]
     Use: Takes 2 integers and converts them to a tuple to use as coordinates.
    */
-  override def point(x:Int, y:Int):Tuple2[Int, Int] = {
-    val point = (x,y)
-    return point
-  }
+  override def point(x:Int, y:Int):Tuple2[Int, Int] = (x,y)
 
 
   /*
@@ -48,10 +45,7 @@ case class Container(x:Int, y:Int, h:Int, w:Int) extends Tcontainer {
     Use: Calculate the surface of the container.
    */
 
-  override def size():Int = {
-    val surface = width*height
-    return surface
-  }
+  override def size():Int = width*height
 
   /*
     Function: center
@@ -59,14 +53,7 @@ case class Container(x:Int, y:Int, h:Int, w:Int) extends Tcontainer {
     Returns: Tuple2[Int, Int]
     Use: Calculate the center point of the container.
    */
-  override def center():Tuple2[Int, Int] = {
-
-    val hor_center = ((w - x)/2)
-    val ver_center = ((h - y)/2)
-
-    val center = point(hor_center,ver_center)
-    return center
-  }
+  override def center():Tuple2[Int, Int] = (((w - x)/2), ((h - y)/2))
 
 
 }

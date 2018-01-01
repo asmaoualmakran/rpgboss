@@ -20,8 +20,8 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
     Return: Int
     Use: Calculate the number of nodes needed to create the BST using it's height.
    */
-  def calcSize(): Int={
-    val result = (math.pow(2, (height-1)))-1
+ private def calcSize(): Int={
+    val result = (math.pow(2, height))-1
     return result.toInt
   }
 

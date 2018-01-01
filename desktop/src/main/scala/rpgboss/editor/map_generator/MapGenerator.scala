@@ -12,6 +12,7 @@ class MapGenerator(iterations:Int, seed:Int, canvas_height: Int, canvas_width:In
   val containerGen = new ContainerGenerator(this.start_container, seed, this.minimumSize)
   var bst_tree = new BinarySearchTree[Container](this.iterations)
   val bstIter = new BinarySearchTreeIterator[Container](bst_tree)
+  bstIter.initStack()   //initialize the stack
 
   def fillBST(containers: List[Container]): Unit={
     for(i <- 0 to this.iterations){
