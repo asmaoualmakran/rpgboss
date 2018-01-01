@@ -100,8 +100,9 @@ class BinarySearchTreeIteratorSpec extends FlatSpec  with Matchers with TableDri
 
     val BSTIter = new BinarySearchTreeIterator[Int](BST)
     BSTIter.initStack()
-    BSTIter.nextLeaf()
-    BSTIter.nextLeaf()
+    for(i <- 0 to 3){
+      BSTIter.nextLeaf()
+    }
 
 
   }
@@ -116,7 +117,6 @@ class BinarySearchTreeIteratorSpec extends FlatSpec  with Matchers with TableDri
         ("100"),
         ("70"),
         ("80"),
-        ("15"),
         ("13")
       )
     forAll(nodeValues) { (node: String) =>
@@ -126,16 +126,46 @@ class BinarySearchTreeIteratorSpec extends FlatSpec  with Matchers with TableDri
 
     val BSTIter = new BinarySearchTreeIterator[Int](BST)
     BSTIter.initStack()
-    BSTIter.next()
-    BSTIter.next()
+
+    for(i <- 0 to 6){
+      var node = BSTIter.next()
+      println(i, node.getValue())
+
+    }
+
+
   }
 
-  it should "thrown an error, that the tree is empty" in{
+  it should "throw an error, that the tree is empty" in{
     val BST = new BinarySearchTree[Int](4)
     val BSTIter = new BinarySearchTreeIterator[Int](BST)
     val thrown = intercept[Exception]{
       BSTIter.initStack()
     }
     assert(thrown.getMessage === "Can not initialize stack, root = null.")
+  }
+  it should "throw an end of three error" in{
+    val BST = new BinarySearchTree[Int](2)
+    val nodeValues =
+      Table(
+        ("node values"),
+        ("2"),
+        ("30"),
+        ("50")
+      )
+    forAll(nodeValues) { (node: String) =>
+      val nodeVal = node.toInt
+      BST.addValue(nodeVal)
+    }
+
+    val BSTIter = new BinarySearchTreeIterator[Int](BST)
+    BSTIter.initStack()
+    for(i <- 0 to 2){
+      BSTIter.next()
+    }
+    val thrown = intercept[Exception]{
+      BSTIter.next()
+    }
+    assert(thrown.getMessage === ("EOF tree is reached, reinitialize the stack"))
   }
 }

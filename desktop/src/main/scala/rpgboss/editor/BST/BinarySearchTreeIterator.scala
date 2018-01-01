@@ -1,5 +1,7 @@
 package rpgboss.editor.BST
+import scala.collection.mutable
 import scala.collection.mutable.Stack
+import scala.util.Failure
 
 
 /*
@@ -13,12 +15,14 @@ import scala.collection.mutable.Stack
   Use: Iterate over a binary search tree.
  */
 
-class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterator[T]{
+class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterator[T] {
 
 
   private val root = this.BST.getRoot()
   // The stack is used to keep track of which nodes are already 'visited' by the iterator.
-  private var stack = new Stack [Node[T]]()
+  //  private
+
+  private val stack = new Stack[Node[T]]()
 
   /*
     Function: initStack
@@ -27,14 +31,15 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
     Use: Initialize the stack if it is empty and if the binary search tree is non-empty.
    */
 
-  def initStack(): Unit ={
-    if(!BST.isNull_?()){
-      if(stack.isEmpty) {       // can only initialize the stack when it is empty and the tree had a root => not in use
-        stack.push(root)
-      }else{
+  def initStack(): Unit = {
+    if (!BST.isNull_?()) {
+      if (!stack.isEmpty) {
         sys.error("Can not initialize stack, it contains element")
+      } else {
+        stack.push(root)
       }
-    }else{
+
+    } else {
       sys.error("Can not initialize stack, root = null.")
     }
   }
@@ -46,8 +51,8 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
     Use: Check whether all nodes are 'visited'.
    */
 
- override def endOfTree_?(): Boolean ={
-    if(stack.isEmpty){
+  override def endOfTree_?(): Boolean = {
+    if (stack.isEmpty) {
       return true
     }
     else false
@@ -62,14 +67,14 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
     Use: Get the left child of a node if it exists.
    */
 
-  override def getNextLeft(node: Node[T]): Node[T]={
-      if(node.isLeaf_?()){
-        return null
-      }else if (node.hasLeftChild_?()){
-        return node.leftChild
-      }else{
-        return null
-      }
+  override def getNextLeft(node: Node[T]): Node[T] = {
+    if (node.isLeaf_?()) {
+      return null
+    } else if (node.hasLeftChild_?()) {
+      return node.leftChild
+    } else {
+      return null
+    }
   }
 
   /*
@@ -81,14 +86,14 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
     Use: Get the right child of a node if it exists.
    */
 
-  override def getNextRight(node: Node[T]): Node[T]={
-      if(node.isLeaf_?()){
-        return null
-      }else if (node.hasRightChild_?()){
-        return node.rightChild
-      }else{
-        return null
-      }
+  override def getNextRight(node: Node[T]): Node[T] = {
+    if (node.isLeaf_?()) {
+      return null
+    } else if (node.hasRightChild_?()) {
+      return node.rightChild
+    } else {
+      return null
+    }
   }
 
 
@@ -99,20 +104,33 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
     Use: Get the node following the last node that is visited.
    */
 
-  override def next(): Node[T]={
-    if(stack.isEmpty){
-      return sys.error("EOF tree is reached, reinitialize the stack")
-    }else if(stack.head.isLeaf_?()){
-      val top = stack.head
-      stack.pop()                   // the node is not longer needed it has no children
-      return top
-    }else{
-      val top = stack.head
-      stack.pop()                  // the node is visited, no longer needed, it's children are pushed on top
-      stack.push(getNextRight(top), getNextLeft(top))
-      return top
+  override def next(): Node[T] = {
+    if (endOfTree_?()) {
+      sys.error("EOF tree is reached, reinitialize the stack")
+    } else if (stack.top == null) {
+
+      stack.pop()
+
+    } else if (stack.top.isLeaf_?()) {
+      val topelm = stack.top
+
+      stack.pop()
+      return topelm
+    } else {
+      val topelm = stack.top
+
+      stack.pop()
+      if (topelm.hasRightChild_?()) {
+        stack.push(getNextRight(topelm))
+      }
+      if (topelm.hasLeftChild_?()) {
+        stack.push(getNextLeft(topelm))
+      }
+
+      return topelm
     }
   }
+
   /*
     Function: nextLeaf
     Parameters: n/a
@@ -120,14 +138,14 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
     Use: Get the node following the last leaf node that is visited.
    */
 
-  override def nextLeaf(): Node[T] ={
-
-    var node = next()             // iterate over the tree until it reaches al leaf node
-    while (!node.isLeaf_?()){     // next() keeps which nodes are visited an which not
+  override def nextLeaf(): Node[T] = {
+   var node = next()
+    while (!node.isLeaf_?()){
+      println(node.getValue())
       node = next()
     }
+    println(node.getValue(), "leaf")
     return node
   }
-
 
 }

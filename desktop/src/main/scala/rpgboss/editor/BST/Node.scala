@@ -14,9 +14,9 @@ class Node[T](value: T) extends Tnode[T] {
 
   var hasNext: Boolean = false
   var hasParent: Boolean = false
-  var leftChild: Node[T] = _
-  var rightChild: Node[T] = _
-  var parent: Node[T] = _
+  var leftChild: Node[T] = null
+  var rightChild: Node[T] = null
+  var parent: Node[T] = null
 
   /*
     Function: getValue
@@ -26,7 +26,7 @@ class Node[T](value: T) extends Tnode[T] {
    */
 
   override def getValue(): T={
-    this.value
+    return this.value
   }
 
   /*
@@ -84,7 +84,10 @@ class Node[T](value: T) extends Tnode[T] {
    */
 
   def hasParent_?(): Boolean={
-   this.parent != null
+   if(parent != null){
+      return true
+    }
+    false
   }
 
   /*
@@ -95,7 +98,10 @@ class Node[T](value: T) extends Tnode[T] {
    */
 
   def hasLeftChild_?(): Boolean={
-   this.leftChild != null
+   if(this.leftChild == null){
+      return false
+    }
+    true
   }
 
   /*
@@ -106,7 +112,10 @@ class Node[T](value: T) extends Tnode[T] {
    */
 
   def hasRightChild_?(): Boolean={
-    this.rightChild != null
+    if(this.rightChild == null){
+      return false
+    }
+    true
   }
 
   /*
@@ -117,7 +126,7 @@ class Node[T](value: T) extends Tnode[T] {
    */
 
   override def isLeaf_?(): Boolean={
-   !hasLeftChild_?() && !hasRightChild_?()
+  !hasLeftChild_?() && !hasRightChild_?()
   }
 
 
