@@ -36,7 +36,7 @@ case class Container(x:Int, y:Int, h:Int, w:Int) extends Tcontainer {
     Use: Takes 2 integers and converts them to a tuple to use as coordinates.
    */
   override def point(x:Int, y:Int):Tuple2[Int, Int] = {
-    val point = Tuple2(x,y)
+    val point = (x,y)
     return point
   }
 

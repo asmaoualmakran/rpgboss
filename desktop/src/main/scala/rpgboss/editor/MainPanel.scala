@@ -30,6 +30,16 @@ class MainPanel(val topWin: Frame)
   }
   val window = topWin
 
+  /*
+    Code below needs adjustments -> not what it should do
+   */
+  val actionRandom = Action(getMessage("New_Random_Map")){
+    if (askSaveUnchanged()) {
+      val d = new NewProjectDialog(topWin, p => setProject(p))
+      d.open()
+    }
+  }
+
   val actionNew = Action(getMessage("New_Project")) {
     if (askSaveUnchanged()) {
       val d = new NewProjectDialog(topWin, p => setProject(p))

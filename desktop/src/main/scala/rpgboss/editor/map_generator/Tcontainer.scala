@@ -9,8 +9,8 @@ trait Tcontainer {
   val width: Int
   val height: Int
 
-  def point(x:Int, y:Int):List[Int] = ???
+  def point(x:Int, y:Int):Tuple2[Int, Int] = ???
   def size():Int = ???
-  def center():List[Int] = ???
+  def center():Tuple2[Int, Int] = ???
 
 }
