@@ -5,14 +5,11 @@ import rpgboss.editor.{MapLayers, MapViewState}
 
 class placeDecoration(vs: MapViewState) extends randomDecorations(){
 
-  override def placeDecorations(nod: Int): Unit = {
+  def placeDecorations(nod: Int): Unit = {
 
     NumberOfDecorations = nod
 
-    if (NumberOfDecorations == iteration) {
-      iteration -= NumberOfDecorations
-    } else {
-      iteration += 1
+    for (a <- 1 to NumberOfDecorations){
 
       // Get random x and y
       val ranLoc = new randomLocation(vs)
@@ -30,8 +27,8 @@ class placeDecoration(vs: MapViewState) extends randomDecorations(){
       val int2 = decoration.tail.head
       val int3 = decoration.tail.tail.head
 
-      val tCode = Array(Array(Array(
-        int1.asInstanceOf[Byte], int2.asInstanceOf[Byte], int3.asInstanceOf[Byte])))
+      val dec = new decoration(int1, int2, int3)
+      val tCode = dec.getCode
 
       // Decorations belong on the top layer
       val selectedLayer = MapLayers.Top
@@ -40,12 +37,7 @@ class placeDecoration(vs: MapViewState) extends randomDecorations(){
       Pencil.onMouseDown(vs, tCode, selectedLayer, x, y)
       vs.commit()
 
-      println(s"Placed decoration ($int1, $int2, $int3) at ($x, $y)")
-
-      // Repeat
-      placeDecorations(nod)
+      println(s"Placed decoration#$a: ($int1, $int2, $int3) at ($x, $y)")
     }
   }
-
-
 }

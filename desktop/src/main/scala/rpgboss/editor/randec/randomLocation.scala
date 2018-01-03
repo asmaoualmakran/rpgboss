@@ -31,7 +31,7 @@ class randomLocation(vs: MapViewState){
     if (withinBounds(x, y) && tileOccupation(x, y) == 0 ) {
       List(x, y)
     } else {
-      println("unfit location ~ retrying...")
+      println(s"unfit location ($x, $y) ~ retrying...")
       getLocation()
     }
 
