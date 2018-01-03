@@ -4,11 +4,11 @@ import rpgboss.editor.misc.GraphicsUtils.TileRect
 import rpgboss.model._
 
 
-class startLocation(
+class StartLocation(
                      sm: StateMaster,
                      yTile: Int,
                      xTile: Int,
-                     mapname: String,
+                     mapname: String
                    ) {
 
 
@@ -24,4 +24,4 @@ class startLocation(
 
 
 
-}
+

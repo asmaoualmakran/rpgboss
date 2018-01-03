@@ -8,7 +8,7 @@ import rpgboss.model.event._
 
 import scala.collection.mutable.ArrayBuffer
 
-class endLocation(vs: MapViewState, x: Int, y: Int, totalEvents: Int) {
+class EndLocation(vs: MapViewState, x: Int, y: Int, totalEvents: Int) {
   /*
   Makes an end Location,
   This is an event that terminates the game
