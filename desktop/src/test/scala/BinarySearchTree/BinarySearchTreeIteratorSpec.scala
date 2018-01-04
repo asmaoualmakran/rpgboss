@@ -2,8 +2,7 @@ package BinarySearchTree
 
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.{FlatSpec, Matchers}
-import rpgboss.editor.BST.BinarySearchTreeIterator
-import rpgboss.editor.BST.BinarySearchTree
+import rpgboss.editor.BST.{BinarySearchTreeIterator, BinarySearchTree}
 
 class BinarySearchTreeIteratorSpec extends FlatSpec  with Matchers with TableDrivenPropertyChecks {
 

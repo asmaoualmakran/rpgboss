@@ -56,12 +56,8 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
     User: Ask whether the tree is empty
    */
 
-  def isNull_?(): Boolean={
-    if(rootNode == null){
-      return true
-    }
-    return false
-  }
+  def isNull_?(): Boolean= rootNode == null
+
 
   /*
     Function: initTree
@@ -84,10 +80,7 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
     Use: Get the root of the tree.
    */
 
-  def getRoot(): Node[T]={
-    val root = getNode(rootIndex)
-    return root
-  }
+  def getRoot(): Node[T]= getNode(rootIndex)
 
 
   /*
@@ -225,8 +218,6 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
   def addValue(newValue:T): Unit={
     val newNode = new Node[T](newValue)
     addNode(newNode)
-  //  printTree()
-
   }
 
 

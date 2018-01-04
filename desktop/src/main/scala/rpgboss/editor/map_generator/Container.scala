@@ -35,7 +35,13 @@ case class Container(x:Int, y:Int, h:Int, w:Int) extends Tcontainer {
     Return: Tuple2[Int, Int]
     Use: Takes 2 integers and converts them to a tuple to use as coordinates.
    */
-  override def point(x:Int, y:Int):Tuple2[Int, Int] = (x,y)
+  override def point(x:Int, y:Int):Tuple2[Int, Int] ={
+    if(x < right_bound && x > left_bound && y < lower_bound && y > upper_bound){
+      return (x,y)
+    }else {
+      sys.error("Point is out of range of the container")
+    }
+  }
 
 
   /*

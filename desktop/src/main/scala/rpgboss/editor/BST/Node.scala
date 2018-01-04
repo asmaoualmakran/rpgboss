@@ -83,12 +83,7 @@ class Node[T](value: T) extends Tnode[T] {
     Use: Returns true when the node has a parent node.
    */
 
-  def hasParent_?(): Boolean={
-   if(parent != null){
-      return true
-    }
-    false
-  }
+  def hasParent_?(): Boolean= parent != null
 
   /*
     Function: hasLeftChild_?
@@ -97,12 +92,7 @@ class Node[T](value: T) extends Tnode[T] {
     Use: Returns true when the node has a left child.
    */
 
-  def hasLeftChild_?(): Boolean={
-   if(this.leftChild == null){
-      return false
-    }
-    true
-  }
+  def hasLeftChild_?(): Boolean= this.leftChild != null
 
   /*
     Function: hasRightChild_?
@@ -111,12 +101,7 @@ class Node[T](value: T) extends Tnode[T] {
     Use: Returns true when the node has a right child.
    */
 
-  def hasRightChild_?(): Boolean={
-    if(this.rightChild == null){
-      return false
-    }
-    true
-  }
+  def hasRightChild_?(): Boolean= this.rightChild != null
 
   /*
     Function: isLeaf_?
@@ -125,9 +110,7 @@ class Node[T](value: T) extends Tnode[T] {
     Use: Returns true when the node has no children.
    */
 
-  override def isLeaf_?(): Boolean={
-  !hasLeftChild_?() && !hasRightChild_?()
-  }
+  override def isLeaf_?(): Boolean= !hasLeftChild_?() && !hasRightChild_?()
 
 
   /*

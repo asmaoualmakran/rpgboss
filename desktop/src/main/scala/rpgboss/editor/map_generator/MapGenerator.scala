@@ -3,7 +3,7 @@ package rpgboss.editor.map_generator
 import rpgboss.editor.BST.{BinarySearchTree, BinarySearchTreeIterator}
 
 import scala.collection.mutable.MutableList
-
+/*
 
 class MapGenerator(iterations:Int, seed:Int, canvas_height: Int, canvas_width:Int) {
 
@@ -37,3 +37,4 @@ class MapGenerator(iterations:Int, seed:Int, canvas_height: Int, canvas_width:In
 
 }
 
+*/
