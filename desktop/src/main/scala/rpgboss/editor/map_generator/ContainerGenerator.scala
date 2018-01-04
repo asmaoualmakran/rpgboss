@@ -92,7 +92,7 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int) 
 
 
 
-      } else if (random.nextInt(1) == 1){ // otherwise split it vertically
+      } else{ // otherwise split it vertically
         val middle = container.width / 2
         val c1 = new Container(container.leftBound, middle, container.upperBound, container.lowerBound)
         val c2 = new Container(middle, container.rightBound, container.upperBound, container.lowerBound)

@@ -36,15 +36,13 @@ class MapGenerator(iterations:Int, seed:Int, canvas_height: Int, canvas_width:In
     bstIter.initStack()
 
     val result: MutableList[Container] = MutableList()
-    for(_<- 1 to bst_tree.numberOfLeafs){
+    while(!bstIter.endOfTree_?()){
 
       result.+=(bstIter.nextLeaf().getValue())
     }
     return result.toList
 
   }
-
-
 
 }
 
