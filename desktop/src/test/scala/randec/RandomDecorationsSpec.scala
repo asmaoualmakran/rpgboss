@@ -22,7 +22,7 @@ class RandomDecorationsSpec extends UnitSpec{
 
 
   "randomDecorations" should "maintain a reasonable number of decorations" in{
-    val nod = ranDec.NumberOfDecorations  // nod -> number of decorations
+    val nod = ranDec.NumberOfDecorations
 
     nod should (be >= 0 and be <=  RpgMap.maxXSize * RpgMap.maxYSize)
   }
