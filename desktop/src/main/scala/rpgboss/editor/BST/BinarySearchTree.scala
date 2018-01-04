@@ -27,7 +27,7 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
 
   val size = calcSize()
   val numberOfNodes = size
-  val numberOfLeafs = math.pow(2, height-1) // tree is guaranteed to be complete -> formula is 2^depth (depth = height-1)
+  val numberOfLeafs = (math.pow(2, height-1)).toInt// tree is guaranteed to be complete -> formula is 2^depth (depth = height-1)
   private var treeArray = Array.ofDim[Node[T]](numberOfNodes)  //The array representing the tree
   private val rootIndex = 0
   private var rootNode = treeArray(rootIndex)

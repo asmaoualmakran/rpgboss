@@ -1,7 +1,6 @@
 package rpgboss.editor.BST
-import scala.collection.mutable
 import scala.collection.mutable.Stack
-import scala.util.Failure
+
 
 
 /*
@@ -51,12 +50,8 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
     Use: Check whether all nodes are 'visited'.
    */
 
-  override def endOfTree_?(): Boolean = {
-    if (stack.isEmpty) {
-      return true
-    }
-    else false
-  }
+  override def endOfTree_?(): Boolean = stack.isEmpty
+
 
   /*
     Function: getNextLeft
@@ -141,10 +136,8 @@ class BinarySearchTreeIterator[T](BST: BinarySearchTree [T]) extends TtreeIterat
   override def nextLeaf(): Node[T] = {
    var node = next()
     while (!node.isLeaf_?()){
-      println(node.getValue())
       node = next()
     }
-    println(node.getValue(), "leaf")
     return node
   }
 

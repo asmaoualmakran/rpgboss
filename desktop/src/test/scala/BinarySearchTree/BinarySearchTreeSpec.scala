@@ -2,18 +2,16 @@ package BinarySearchTree
 
 
 import org.scalatest.prop.TableDrivenPropertyChecks
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
 import rpgboss.editor.BST.BinarySearchTree
 
-
-class BinarySearchTreeSpec extends FlatSpec with Matchers with TableDrivenPropertyChecks{
-
-
-
-  /*
+/*
     BinarySearchTree tests
     Author: Asma Oualmakran
    */
+
+class BinarySearchTreeSpec extends FlatSpec with Matchers with TableDrivenPropertyChecks with BeforeAndAfter{
+
 
   "A BinarySearchTree" should "return null" in{
     val emptyTree = new BinarySearchTree[Int](5)
