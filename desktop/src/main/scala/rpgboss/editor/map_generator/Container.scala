@@ -1,4 +1,5 @@
 package rpgboss.editor.map_generator
+import scala.math.abs
 
 
 /*
@@ -15,15 +16,14 @@ package rpgboss.editor.map_generator
  */
 
 
-case class Container(x:Int, y:Int, h:Int, w:Int) extends Tcontainer {
+case class Container(x:Int, w:Int, y:Int, h:Int) extends Tcontainer {
 
-  val left_bound  = this.x
-  val upper_bound = this.y
-  val lower_bound = this.h
-  val right_bound = this.w
-  val width = right_bound - left_bound
-  val height = lower_bound - upper_bound
-
+  val leftBound = this.x
+  val rightBound = this.w
+  val upperBound = this.y
+  val lowerBound = this.h
+  val width = abs(rightBound - leftBound)
+  val height = abs(lowerBound - upperBound)
 
   /*
     Function: point
@@ -36,7 +36,7 @@ case class Container(x:Int, y:Int, h:Int, w:Int) extends Tcontainer {
     Use: Takes 2 integers and converts them to a tuple to use as coordinates.
    */
   override def point(x:Int, y:Int):Tuple2[Int, Int] ={
-    if(x < right_bound && x > left_bound && y < lower_bound && y > upper_bound){
+    if(x < rightBound && x > leftBound && y < lowerBound && y > upperBound){
       return (x,y)
     }else {
       sys.error("Point is out of range of the container")
@@ -59,8 +59,7 @@ case class Container(x:Int, y:Int, h:Int, w:Int) extends Tcontainer {
     Returns: Tuple2[Int, Int]
     Use: Calculate the center point of the container.
    */
-  override def center():Tuple2[Int, Int] = (((w - x)/2), ((h - y)/2))
-
+  override def center():Tuple2[Int, Int] = ((width/2), (height/2))
 
 }
 

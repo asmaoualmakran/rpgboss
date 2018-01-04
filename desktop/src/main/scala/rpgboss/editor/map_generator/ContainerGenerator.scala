@@ -1,5 +1,4 @@
 package rpgboss.editor.map_generator
-import scala.collection.mutable
 import scala.collection.mutable.{MutableList, Stack}
 import scala.util.Random
 
@@ -22,6 +21,8 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int) 
 
   private var stack = new Stack[Container]()
   private val random = new Random(seed)
+
+
 
   /*
     Function: initStack
@@ -61,12 +62,9 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int) 
     Use: A boolean to check if the container is large enough after splitting.
    */
 
-  private def largeEnough_?(container: Container): Boolean = {
-    if ((((container.height / 2) * container.width) < this.minimumSize) || ((container.height * (container.width / 2)) < this.minimumSize)) {
-      return false
-    }
-    return true
-  }
+  private def largeEnough_?(container: Container): Boolean =
+    ((container.width/2)*container.height) >= minimumSize && ((container.height/2)* container.width) >= minimumSize
+
 
   /*
    Function: splitContainer
@@ -79,26 +77,24 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int) 
   private def splitContainer(container: Container): Tuple2[Container, Container] = {
 
     if (largeEnough_?(container)) {
-      println("start splitting")
 
-      val dir = random.nextInt(1)
+      if (random.nextInt(1) == 0) { // if the direction is 0 -> split the container horizontally
+        val middle = container.height/2
 
-      if (dir == 0) { // if the direction is 0 -> split the container horizontally
-        val middle = container.height / 2
-        val result = (new Container(container.left_bound, container.upper_bound, middle, container.right_bound), // first container that starts at the original upper_bound
-          new Container(container.left_bound, middle, container.lower_bound, container.right_bound)) // and stopts on the splitting point, second container, does the opposite
-        return result
+        return (new Container(container.leftBound, container.rightBound, container.upperBound, middle),
+        new Container(container.leftBound, container.rightBound, middle, container.lowerBound))
 
-      } else { // otherwise split it vertically
+      } else if (random.nextInt(1) == 1){ // otherwise split it vertically
 
         val middle = container.width / 2
-        val result = (new Container(container.left_bound, container.upper_bound, container.lower_bound, middle), // return the 2 new containers in a list
-          new Container(middle, container.upper_bound, container.lower_bound, container.right_bound))
-        return result
+
+        return (new Container(container.leftBound, middle, container.upperBound, container.lowerBound),
+        new Container(middle, container.rightBound, container.upperBound, container.lowerBound))
       }
     }
-    return sys.error("Container is not large enough to split")
+   return sys.error("Container is not large enough to split")
   }
+
 
   /*
     Function: next
@@ -115,7 +111,7 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int) 
 
       val result: MutableList[Container] = MutableList()  // use mutable list to build the result
 
-      for(_ <- stack if !stack.isEmpty){
+      while(!stack.isEmpty){
        val res = splitContainer(stack.top)
         stack.pop()
         result.+=:(res._1)

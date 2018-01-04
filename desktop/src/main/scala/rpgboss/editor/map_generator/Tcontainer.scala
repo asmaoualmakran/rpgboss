@@ -2,10 +2,10 @@ package rpgboss.editor.map_generator
 
 trait Tcontainer {
 
-  val left_bound: Int
-  val upper_bound: Int
-  val lower_bound: Int
-  val right_bound: Int
+  val leftBound: Int
+  val upperBound: Int
+  val lowerBound: Int
+  val rightBound: Int
   val width: Int
   val height: Int
 

@@ -27,9 +27,11 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
 
   val size = calcSize()
   val numberOfNodes = size
-  private var treeArray = Array.ofDim[Node[T]](size)  //The array representing the tree
+  val numberOfLeafs = math.pow(2, height-1) // tree is guaranteed to be complete -> formula is 2^depth (depth = height-1)
+  private var treeArray = Array.ofDim[Node[T]](numberOfNodes)  //The array representing the tree
   private val rootIndex = 0
   private var rootNode = treeArray(rootIndex)
+
 
   /*
     Function: printTree
@@ -39,11 +41,11 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
    */
 
   def printTree(): Unit ={
-    for(i <- 0 to treeArray.length-1){
+    for(i <- 0 to treeArray.length - 1){
       if(treeArray(i) == null){
         print(0," ")
       }else{
-        var node = treeArray(i)
+        val node = treeArray(i)
         print(node.getValue()," ")
       }
     }
@@ -93,7 +95,7 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
    */
 
   private def getNode(index:Int): Node[T]={
-    if(treeArray.nonEmpty){
+    if(treeArray.nonEmpty && index < treeArray.length){
       return treeArray(index)
     }else{
       return null
@@ -108,7 +110,7 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
    */
 
   private def isFull_?(): Boolean={
-    for(i<-0 to treeArray.length) {
+    for(i<-0 to treeArray.length - 1) {
       if (getNode(i) == null) {
         return false
       }
@@ -166,7 +168,7 @@ class BinarySearchTree[T](height: Int) extends Tnode[T]{
     if(treeArray == null){
       return rootIndex
     }else{
-      for(i <- 0 to treeArray.length){
+      for(i <- 0 to treeArray.length - 1){
         if(treeArray(i) == null){
           return i
         }
