@@ -1,7 +1,7 @@
 package rpgboss.editor.randec
 
 
-class randomDecorations(){
+class RandomDecorations(){
 
   val DecorationList: List[List[Int]] =
     List(

@@ -31,6 +31,7 @@ allprojects {
         maven { url 'https://labs.consol.de/maven/repository'}
     }
 
+
     tasks.withType(ScalaCompile) {
         scalaCompileOptions.useAnt = false
     }
@@ -71,7 +72,8 @@ project(":desktop") {
         compile "net.coobird:thumbnailator:0.4.8"
 
         testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
-        testCompile "org.scalatest:scalatest_2.11:2.1.5"
+        //testCompile "org.scalatest:scalatest_2.11:2.1.5"
+        testCompile 'org.scalamock:scalamock-scalatest-support_2.11:3.6.0'
         testRuntime 'org.pegdown:pegdown:1.1.0'
         testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"

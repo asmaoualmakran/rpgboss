@@ -420,7 +420,7 @@ class MapEditor(
         contents += new MenuItem(Action(getMessage("Place_Random_Decorations") + "...") {
 
           def onOk(nod: Int) ={
-            val RanDec = new placeDecoration(vs)
+            val RanDec = new PlaceDecoration(vs)
             RanDec.placeDecorations(nod)
             repaintAll()
           }

@@ -1,6 +1,6 @@
 package rpgboss.editor.randec
 
-class decoration(int1: Int, int2: Int, int3: Int) {
+class Decoration(int1: Int, int2: Int, int3: Int) {
 
   def display() = println(s"decoration: ($int1, $int2, $int3)")
 

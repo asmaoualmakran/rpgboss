@@ -6,29 +6,35 @@ import rpgboss.model.resource.RpgMap
 import rpgboss.model.resource.RpgMap._
 
 
-class randomLocation(vs: MapViewState){
+class RandomLocation(vs: MapViewState){
 
   val map = vs.map
   val mapData: RpgMapData = map.readMapData().get
   mapData.sanitizeForMetadata(map.metadata)
 
+  val startX = 0: Int
+  val endX = RpgMap.initXSize: Int
+
+  val startY = 0: Int
+  val endY = RpgMap.initYSize: Int
+
+  def goodEnough(x: Int, y: Int): Boolean ={
+    if(withinBounds(x, y) && tileOccupation(x, y) == 0){
+      true
+    } else {
+      false
+    }
+  }
+
   def getLocation(): List[Int] = {
 
-    val startX = 0: Int
-    val endX = RpgMap.initXSize: Int
-
-    val startY = 0: Int
-    val endY = RpgMap.initYSize: Int
 
     val rnd = new scala.util.Random
     val x = startX + rnd.nextInt((endX - startX) + 1)
     val y = startY + rnd.nextInt((endY - startY) + 1)
 
-    def withinBounds(x: Int, y: Int) = {
-      x < endX && y < endY && x >= 0 && y >= 0
-    }
 
-    if (withinBounds(x, y) && tileOccupation(x, y) == 0 ) {
+    if (goodEnough(x, y)) {
       List(x, y)
     } else {
       println(s"unfit location ($x, $y) ~ retrying...")
@@ -37,6 +43,9 @@ class randomLocation(vs: MapViewState){
 
   }
 
+  def withinBounds(x: Int, y: Int): Boolean = {
+    x < endX && y < endY && x >= 0 && y >= 0
+  }
 
   def tileOccupation(xTile: Int, yTile: Int):Int = {
 
@@ -62,7 +71,7 @@ class randomLocation(vs: MapViewState){
         occupied = 1
       }
     }
-    return occupied
+    occupied
   }
 
 

@@ -3,7 +3,22 @@ package rpgboss.editor.randec
 import rpgboss.editor.MapViewTools.Pencil
 import rpgboss.editor.{MapLayers, MapViewState}
 
-class placeDecoration(vs: MapViewState) extends randomDecorations(){
+class PlaceDecoration(vs: MapViewState) extends RandomDecorations(){
+
+
+  // Get random x and y
+  def getLoc(): List[Int] ={
+    val ranLoc = new RandomLocation(vs)
+    val pos = ranLoc.getLocation()
+    pos
+  }
+
+  // Grab random decoration from list
+  def getDec(): List[Int] ={
+    val rnd = new scala.util.Random
+    val decorationNumber = rnd.nextInt(DecorationList.length)
+    DecorationList(decorationNumber)
+  }
 
   def placeDecorations(nod: Int): Unit = {
 
@@ -11,23 +26,18 @@ class placeDecoration(vs: MapViewState) extends randomDecorations(){
 
     for (a <- 1 to NumberOfDecorations){
 
-      // Get random x and y
-      val ranLoc = new randomLocation(vs)
-      val pos = ranLoc.getLocation()
-      val x: Int = pos.head
-      val y: Int = pos.tail.head
+      val pos = getLoc()
+      val x = pos.head
+      val y = pos.tail.head
 
-      // Grab random decoration from list
-      val rnd = new scala.util.Random
-      val decorationNumber = rnd.nextInt(DecorationList.length)
-      val decoration = DecorationList(decorationNumber)
+      val decoration = getDec()
 
-      // Grab correct tile code
+      // Generate correct tile code
       val int1 = decoration.head
       val int2 = decoration.tail.head
       val int3 = decoration.tail.tail.head
 
-      val dec = new decoration(int1, int2, int3)
+      val dec = new Decoration(int1, int2, int3)
       val tCode = dec.getCode
 
       // Decorations belong on the top layer
