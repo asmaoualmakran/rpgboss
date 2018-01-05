@@ -16,15 +16,15 @@ class PlaceDecoration(vs: MapViewState) extends RandomDecorations(){
   // Grab random decoration from list
   def getDec(): List[Int] ={
     val rnd = new scala.util.Random
-    val decorationNumber = rnd.nextInt(DecorationList.length)
-    DecorationList(decorationNumber)
+    val decorationNumber = rnd.nextInt(decorationList.length)
+    decorationList(decorationNumber)
   }
 
   def placeDecorations(nod: Int): Unit = {
 
-    NumberOfDecorations = nod
+    numberOfDecorations = nod
 
-    for (a <- 1 to NumberOfDecorations){
+    for (a <- 1 to numberOfDecorations) {
 
       val pos = getLoc()
       val x = pos.head
@@ -37,8 +37,18 @@ class PlaceDecoration(vs: MapViewState) extends RandomDecorations(){
       val int2 = decoration.tail.head
       val int3 = decoration.tail.tail.head
 
-      val dec = new Decoration(int1, int2, int3)
-      val tCode = dec.getCode
+      val scary: Boolean = scaryDecorationList.contains(decoration)
+      val nature: Boolean = natureDecorationList.contains(decoration)
+      val resource: Boolean = resourceDecorationList.contains(decoration)
+      val typeList = List(scary, nature, resource)
+
+      val dec = typeList match {
+        case List(true, false, false) => new ScaryDecoration
+        case List(false, true, false) => new NatureDecoration
+        case List(false, false, true) => new ResourceDecoration
+      }
+
+      val tCode = dec.getCode(int1, int2, int3)
 
       // Decorations belong on the top layer
       val selectedLayer = MapLayers.Top
@@ -47,7 +57,8 @@ class PlaceDecoration(vs: MapViewState) extends RandomDecorations(){
       Pencil.onMouseDown(vs, tCode, selectedLayer, x, y)
       vs.commit()
 
-      println(s"Placed decoration#$a: ($int1, $int2, $int3) at ($x, $y)")
+      val decType = dec.decorationType.display()
+      println(s"Placed decoration#$a: ($int1, $int2, $int3) at ($x, $y) $decType")
     }
   }
 }
