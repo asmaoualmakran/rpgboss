@@ -16,6 +16,8 @@ object RpgDesktop
   with LazyLogging
   with UncaughtExceptionHandler {
 
+  var foo: MainPanel = _
+
   /**
     * Create the initial GUI for creating/opening projects
     * @return
@@ -30,6 +32,7 @@ object RpgDesktop
     peer.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE)
 
     val mainPanel = new MainPanel(this)
+    foo = mainPanel
 
     contents = mainPanel
 
@@ -57,7 +60,7 @@ object RpgDesktop
     * (called by SwingApplication.main)
     * @param args
     */
-  override def startup(args: Array[String]) = {
+  override def startup(args: Array[String])= {
     if (System.getProperty("swing.defaultlaf") == null) {
       UIManager.setLookAndFeel(
         UIManager.getSystemLookAndFeelClassName());
@@ -75,11 +78,12 @@ object RpgDesktop
     t.visible = true
   }
 
+
   /**
     * Main method to start the RpgBoss editor, or (if command-line arguments are given) start a game
     * @param args
     */
-  override def main(args: Array[String]) {
+  override def main(args: Array[String]): Unit = {
     if (args.size >= 2 && args.head == "--player") {
       rpgboss.player.LwjglPlayer.main(args.tail)
     } else {

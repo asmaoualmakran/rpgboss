@@ -57,8 +57,8 @@ class PlaceDecoration(vs: MapViewState) extends RandomDecorations(){
       Pencil.onMouseDown(vs, tCode, selectedLayer, x, y)
       vs.commit()
 
-      val decType = dec.decorationType.display()
-      println(s"Placed decoration#$a: ($int1, $int2, $int3) at ($x, $y) $decType")
+      dec.decorationType.display()
+      println(s"Placed decoration#$a: ($int1, $int2, $int3) at ($x, $y)")
     }
   }
 }

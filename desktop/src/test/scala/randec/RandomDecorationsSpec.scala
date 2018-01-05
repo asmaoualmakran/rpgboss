@@ -1,44 +1,64 @@
 package randec
 
+import rpgboss.editor.GuiTests
 import rpgboss.editor.MapViewTools.Pencil
 import rpgboss.editor.randec._
-import rpgboss.editor.{MapLayers, MapViewState, UnitSpec}
+import rpgboss.editor.{MapViewState, StateMaster, UnitSpec}
 import rpgboss.model.resource.RpgMap
+import rpgboss.editor.RpgDesktop
+import rpgboss.player.RpgGame
+import rpgboss.player.LwjglPlayer
 
 import scala.collection.mutable.ListBuffer
+import scala.reflect.io.File
 
-class RandomDecorationsSpec extends UnitSpec{
+class RandomDecorationsSpec extends UnitSpec {
 
- // val vs = mock[MapViewState]
+  /*
+  def main(args: Array[String]) {
+    val startTime = System.currentTimeMillis()
+    //RpgDesktop.main(new Array[String](0))
+    RpgDesktop.startup(new Array[String](0))
+    println("Time taken: " + ((System.currentTimeMillis() - startTime)/1000) + "s" )
+    //exitApplication()
+  }
+*/
+  RpgDesktop.startup(new Array[String](0))
+  val mainPanel = RpgDesktop.foo
+  val sm = mainPanel.smOpt.get
+  val vs = new MapViewState(sm, "Map000001.rpgmap")
 
-////////////////////////////////
-//// randomDecorations
+
+  //LwjglPlayer.main(new Array[String](0))
+  ////////////////////////////////
+  //// randomDecorations
 
   val ranDec = new RandomDecorations()
 
-  "DecorationList" should "contain a list of lists of integers" in{
-    ranDec.DecorationList shouldBe a [List[List[Int]]]
+  "DecorationList" should "contain a list of lists of integers" in {
+    ranDec.decorationList.isInstanceOf[List[List[Int]]] should be(true)
   }
 
 
-  "randomDecorations" should "maintain a reasonable number of decorations" in{
-    val nod = ranDec.NumberOfDecorations
+  "RandomDecorations" should "maintain a reasonable number of decorations" in {
+    val nod = ranDec.numberOfDecorations
 
-    nod should (be >= 0 and be <=  RpgMap.maxXSize * RpgMap.maxYSize)
+    nod should (be >= 0 and be <= RpgMap.maxXSize * RpgMap.maxYSize)
   }
-/*
-////////////////////////////////
-//// randomLocation
 
-  val ranLoc = new randomLocation(vs)
 
-  "a location" should "be a list of integers with length 2" in {
+  ////////////////////////////////
+  //// randomLocation
+
+  val ranLoc = new RandomLocation(vs)
+
+  "A location" should "be a list of integers with length 2" in {
     val pos = ranLoc.getLocation()
     pos should have length (2)
-    pos shouldBe a [List[Int]]
+    pos.isInstanceOf[List[Int]] should be(true)
   }
 
-  it should "be a list of integers with length 2" in {
+  it should "be a location within bounds" in {
     val pos = ranLoc.getLocation()
     val x = pos.head
     val y = pos.tail.head
@@ -47,50 +67,50 @@ class RandomDecorationsSpec extends UnitSpec{
     y should (be >= 0 and be <= RpgMap.maxYSize)
   }
 
-  it should "be good enough" in{
-    var ge = new ListBuffer[Boolean]()
-    ge += ranLoc.goodEnough(-1, 4)
-    ge += ranLoc.goodEnough(4, -1)
-    ge += ranLoc.goodEnough(9999, 9999)
-    ge should not contain (true)
-  }
+    it should "be good enough" in{
+      var ge = new ListBuffer[Boolean]()
+      ge += ranLoc.goodEnough(-1, 4)
+      ge += ranLoc.goodEnough(4, -1)
+      ge += ranLoc.goodEnough(9999, 9999)
+      ge should not contain (true)
+    }
+/*
+    "tileOccupation" should "return the tile occupation of a certain position" in{
 
-  "tileOccupation" should "return the tile occupation of a certain position" in{
+      val ranLoc = new RandomLocation(vs)
 
-    val ranLoc = new randomLocation(vs)
+      val pos = ranLoc.getLocation()
+      val x = pos.head
+      val y = pos.tail.head
 
-    val pos = ranLoc.getLocation()
-    val x = pos.head
-    val y = pos.tail.head
+      val tCodes = new decoration(1, 1, 4).getCode  //small bush for testing purposes
 
-    val tCodes = new decoration(1, 1, 4).getCode  //small bush for testing purposes
-
-    ranLoc.tileOccupation(x, y) should be (0)
-    Pencil.onMouseDown(vs, tCodes, MapLayers.Top, x, y)
-    ranLoc.tileOccupation(x, y) should be (1)
-  }
-
-
-
-////////////////////////////////
-//// placeDecorations
-
-  val placeDec = new placeDecoration(vs)
-
-  "placeDecorations" should "get a valid location" in {
-    val pos = placeDec.getLoc()
-    val x = pos.head
-    val y = pos.tail.head
-    ranLoc.goodEnough(x, y) should be (true)
-
-  }
-
-  it should "use a valid decoration" in {
-    val dec = placeDec.getDec()
-    ranDec.DecorationList should contain (dec)
-  }
+      ranLoc.tileOccupation(x, y) should be (0)
+      Pencil.onMouseDown(vs, tCodes, MapLayers.Top, x, y)
+      ranLoc.tileOccupation(x, y) should be (1)
+    }
 
 
 
-*/
+  ////////////////////////////////
+  //// placeDecorations
+
+    val placeDec = new placeDecoration(vs)
+
+    "placeDecorations" should "get a valid location" in {
+      val pos = placeDec.getLoc()
+      val x = pos.head
+      val y = pos.tail.head
+      ranLoc.goodEnough(x, y) should be (true)
+
+    }
+
+    it should "use a valid decoration" in {
+      val dec = placeDec.getDec()
+      ranDec.DecorationList should contain (dec)
+    }
+
+
+
+  */
 }

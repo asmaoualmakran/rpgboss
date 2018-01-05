@@ -18,18 +18,18 @@ class DecorationsDialog (owner: Window,
   centerDialog(new Dimension(120, 50))
 
 
-  val DecorationsPanel = new DecorationsPanel(
+  val decorationsPanel = new DecorationsPanel(
     owner,
     sm
   )
 
   def okFunc() = {
-    val check = DecorationsPanel.exact_decorations.text
+    val check = decorationsPanel.exactDecorations.text
     if (check == "") {
       Dialog.showMessage(contents.head, "Please input a value.", title = "Error")
     } else {
 
-      val nod = DecorationsPanel.exact_decorations.text.toInt
+      val nod = decorationsPanel.exactDecorations.text.toInt
       if (nod < 0 || nod > 3000) {
         Dialog.showMessage(contents.head, "Range: 0 -> 3000", title = "Error")
       } else {
@@ -40,7 +40,7 @@ class DecorationsDialog (owner: Window,
   }
 
   contents = new BoxPanel(Orientation.Vertical) {
-    contents += DecorationsPanel
+    contents += decorationsPanel
     contents += new DesignGridPanel {
       addButtons(okBtn, cancelBtn)
 

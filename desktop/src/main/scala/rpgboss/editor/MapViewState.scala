@@ -35,23 +35,21 @@ object MapLayers extends RpgEnum {
  *  This class also provides a stack of old states for an undo mechanism.
  */
 class MapViewState(val sm: StateMaster, val mapName: String) {
-  //if (sm != null && mapName != null) {
-    var prevStates: List[RpgMapData] = List()
+  var prevStates: List[RpgMapData] = List()
 
-    def map = sm.getMap(mapName).get
+  def map = sm.getMap(mapName).get
+  def mapMeta = map.metadata
 
-    def mapMeta = map.metadata
+  // Used to retrieve the image data of the different tiles
+  val tileCache = new MapTileCache(sm.assetCache, map)
 
-    // Used to retrieve the image data of the different tiles
-    val tileCache = new MapTileCache(sm.assetCache, map)
+  // Map data in editing, for example while mouse is down.
+  // Think of this as the working copy
+  // We can undo to a previous state
+  var nextMapData = sm.getMapData(mapName).deepcopy()
 
-    // Map data in editing, for example while mouse is down.
-    // Think of this as the working copy
-    // We can undo to a previous state
-    var nextMapData = sm.getMapData(mapName).deepcopy()
+  var inTransaction = false
 
-    var inTransaction = false
-  //}
   // Initialize the prevStates list with the initial state
   prevStates = List(nextMapData.deepcopy())
 

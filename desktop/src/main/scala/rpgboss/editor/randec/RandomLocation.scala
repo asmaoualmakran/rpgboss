@@ -8,15 +8,15 @@ import rpgboss.model.resource.RpgMap._
 
 class RandomLocation(vs: MapViewState){
 
-  val mapData = vs.sm.getMapData(vs.mapName)
+  val mapData: RpgMapData = vs.sm.getMapData(vs.mapName)
   //val mapData: RpgMapData = map.readMapData().get
   mapData.sanitizeForMetadata(vs.mapMeta)
 
-  val startX = 0: Int
-  val endX = RpgMap.initXSize: Int
+  val startX: Int = 0
+  val endX: Int = RpgMap.initXSize
 
-  val startY = 0: Int
-  val endY = RpgMap.initYSize: Int
+  val startY: Int = 0
+  val endY: Int = RpgMap.initYSize
 
   def goodEnough(x: Int, y: Int): Boolean ={
     withinBounds(x, y) && tileOccupation(x, y) == 0

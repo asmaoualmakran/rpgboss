@@ -13,14 +13,14 @@ class DecorationsPanel (owner: Window,
     text = ""
     columns = 5
   }
-  val exact_decorations = newField
+  val exactDecorations = newField
 
 
   row().grid()
     .add(new Label("How Many?"))
 
   row().grid()
-    .add(new Label("Exact number: ")).add(exact_decorations)
+    .add(new Label("Exact number: ")).add(exactDecorations)
 
 
 }
