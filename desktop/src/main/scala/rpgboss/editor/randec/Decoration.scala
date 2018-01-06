@@ -8,17 +8,21 @@ abstract class Decoration {
 }
 
 trait DecorationType{
+  val dType: String
   def display(): Unit
 }
 
 object ScaryType extends DecorationType{
-  def display() = print(" [Scary] ")
+  val dType = "Scary"
+  def display() = print(s" [$dType] ")
 }
 object NatureType extends DecorationType{
-  def display() = print(" [Nature] ")
+  val dType = "Nature"
+  def display() = print(s" [$dType] ")
 }
 object ResourceType extends DecorationType{
-  def display() = print(" [Resource] ")
+  val dType = "Resource"
+  def display() = print(s" [$dType] ")
 }
 
 

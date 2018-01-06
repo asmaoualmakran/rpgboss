@@ -16,7 +16,7 @@ object RpgDesktop
   with LazyLogging
   with UncaughtExceptionHandler {
 
-  var foo: MainPanel = _
+  var tempPanel: MainPanel = _
 
   /**
     * Create the initial GUI for creating/opening projects
@@ -32,7 +32,7 @@ object RpgDesktop
     peer.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE)
 
     val mainPanel = new MainPanel(this)
-    foo = mainPanel
+    tempPanel = mainPanel
 
     contents = mainPanel
 

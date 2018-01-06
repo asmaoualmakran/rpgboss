@@ -43,25 +43,25 @@ class RandomLocation(vs: MapViewState){
     x < endX && y < endY && x >= 0 && y >= 0
   }
 
-  def tileOccupation(xTile: Int, yTile: Int):Int = {
+  def tileOccupation(x: Int, y: Int):Int = {
 
     /*
     return 1 == tile occupied
     return 0 == tile free
      */
 
-    val xIdx = xTile * bytesPerTile
+    val xIdx = x * bytesPerTile
     var occupied = 0
 
     // Test top layer first, as if the top layer provides an answer, there is
     // no need to test subsequent layers
     for (layerAry <- List(mapData.topLayer, mapData.midLayer, mapData.botLayer)) {
-      val row = layerAry(yTile)
+      val row = layerAry(y)
       val byte1 = row(xIdx)
       val byte2 = row(xIdx + 1)
       val byte3 = row(xIdx + 2)
 
-     // println(s"byte123: $byte1, $byte2, $byte3")
+      println(s"byte123: $byte1, $byte2, $byte3")
 
       if(byte1 != -1 && byte1 != -2){
         occupied = 1
