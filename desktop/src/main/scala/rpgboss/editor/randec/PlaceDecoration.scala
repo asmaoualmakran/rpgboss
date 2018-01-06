@@ -5,7 +5,6 @@ import rpgboss.editor.{MapLayers, MapViewState}
 
 class PlaceDecoration(vs: MapViewState) extends RandomDecorations(){
 
-
   // Get random x and y
   def getLoc(): List[Int] ={
     val ranLoc = new RandomLocation(vs)
@@ -57,7 +56,7 @@ class PlaceDecoration(vs: MapViewState) extends RandomDecorations(){
       Pencil.onMouseDown(vs, tCode, selectedLayer, x, y)
       vs.commit()
 
-      dec.decorationType.display()
+      dec.doDisplay()
       println(s"Placed decoration#$a: ($int1, $int2, $int3) at ($x, $y)")
     }
   }

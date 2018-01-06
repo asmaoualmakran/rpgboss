@@ -36,7 +36,6 @@ class RandomDecorations(){
     )
 
   var numberOfDecorations: Int = 0
-  val maxDecorations: Int = 3000
 
 
 }
