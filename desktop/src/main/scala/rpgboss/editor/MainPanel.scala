@@ -25,6 +25,7 @@ class MainPanel(val topWin: Frame)
 
   minimumSize = new Dimension(800, 600)
 
+
   def getWindow() = {
     topWin
   }

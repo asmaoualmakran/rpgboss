@@ -10,25 +10,32 @@ import rpgboss.editor.uibase._
 import rpgboss.editor.misc._
 import rpgboss.editor.misc.GraphicsUtils._
 import com.typesafe.scalalogging.slf4j.LazyLogging
+
 import scala.math._
 import scala.swing._
 import scala.swing.event._
 import javax.imageio._
-import java.awt.{ BasicStroke, AlphaComposite, Color }
+import java.awt.{AlphaComposite, BasicStroke, Color}
 import java.awt.geom.Line2D
 import java.awt.event.MouseEvent
+
 import rpgboss.model.event.RpgEvent
 import rpgboss.editor.dialog.EventDialog
+import rpgboss.editor.dialog._
 import java.awt.image.BufferedImage
+
 import scala.collection.mutable.Buffer
 import javax.swing.event._
 import javax.swing.KeyStroke
 import java.awt.event.KeyEvent
 import java.awt.event.InputEvent
+
 import rpgboss.editor.imageset.selector.TabbedTileSelector
 import javax.swing.ImageIcon
+
 import rpgboss.editor.dialog.EventInstanceDialog
 import rpgboss.editor.Internationalized._
+import rpgboss.editor.randec._
 import rpgboss.editor.util.MouseUtil
 
 /**
@@ -410,7 +417,28 @@ class MapEditor(
           }
         }
 
-        contents += new Separator
+        contents += new MenuItem(Action(getMessage("Place_Random_Decorations") + "...") {
+
+          def onOk(nod: Int) ={
+            val ranDec = new PlaceDecoration(vs)
+            ranDec.placeDecorations(nod)
+            repaintAll()
+          }
+
+          val dialog =
+            new DecorationsDialog(
+              projectPanel.mainP.topWin,
+              sm,
+              onOk = onOk)
+
+
+          dialog.open()
+
+        }
+        )
+
+
+          contents += new Separator
 
         contents += new MenuItem(Action(getMessage("Set_Start_Location")) {
           def repaintMapLoc(l: MapLoc) =
@@ -460,6 +488,7 @@ class MapEditor(
     }.map(_._1)
 
     val button = e.peer.getButton()
+
 
     // If the event layer is currently selected
     if (selectedLayer == Evt) {
@@ -527,6 +556,7 @@ class MapEditor(
         Some((true, onDrag _, onDragStop _))
       } else None
     }
+
   }
 
   //--- REACTIONS ---//

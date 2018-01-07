@@ -185,11 +185,14 @@ object MapViewTools {
   // Draw a single tile
   case object Pencil extends MapViewTool {
     val name = "Pencil"
+
     def onMouseDown(
       vs: MapViewState, tCodes: Array[Array[Array[Byte]]],
       layer: MapLayers.Value,
       x1: Int, y1: Int) = {
       import MapLayers._
+
+
 
       mapOfArrays(vs.nextMapData).get(layer).map { layerAry =>
         for (
