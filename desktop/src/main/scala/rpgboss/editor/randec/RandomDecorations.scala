@@ -3,36 +3,20 @@ package rpgboss.editor.randec
 
 class RandomDecorations(){
 
+  val s: Int = 0    // Scary
+  val n: Int = 1   //  Nature
+  val r: Int = 2  //   Resource
+
   val decorationList: List[List[Int]] =
     List(
-      List(1, 4, 5),  List(1, 1, 4),  List(1, 6, 9),  List(1, 5, 9),  List(1, 6, 10),
-      List(1, 3, 6),  List(3, 0, 9),  List(4, 2, 3),  List(4, 5, 0),  List(4, 4, 3),
-      List(4, 0, 2),  List(4, 1, 14), List(1, 2 , 5), List(1, 3 , 5), List(1, 5, 5),
-      List(1, 0, 4),  List(1, 2, 4),  List(1, 3, 4),  List(1, 4, 4),  List(1, 5, 4),
-      List(1, 4, 9),  List(1, 5, 10), List(1, 7, 10), List(1, 5, 13), List(1, 6, 13),
-      List(1, 7, 13), List(1, 5, 14), List(1, 6, 14), List(1, 7, 14), List(1, 5, 15),
-      List(1, 6, 15), List(1, 7, 15), List(4, 5, 1),  List(4, 2, 2),  List(4, 0, 3),
-      List(4, 4, 2),  List(4, 1, 13), List(4, 2, 13)
-    )
-
-  val scaryDecorationList: List[List[Int]] =
-    List(
-      List(1, 6, 9), List(4, 2, 3),  List(4, 5, 0), List(4, 4, 3),
-      List(4, 0, 2), List(4, 2, 2),  List(4, 0, 3), List(4, 4, 2)
-    )
-
-  val natureDecorationList: List[List[Int]] =
-    List(
-      List(1, 1, 4), List(1, 3, 6), List(1, 2, 5), List(1, 3, 5),
-      List(1, 0, 4),  List(1, 2, 4), List(1, 3, 4), List(1, 4, 4), List(1, 5, 4),
-      List(1, 4, 9),  List(1, 5, 13), List(1, 6, 13),List(1, 7, 13),List(1, 5, 14),
-      List(1, 6, 14), List(1, 7, 14), List(1, 5, 15),List(4, 5, 1), List(3, 0, 9)
-    )
-
-  val resourceDecorationList: List[List[Int]] =
-    List(
-      List(1, 4, 5), List(1, 5, 10), List(1, 5, 5), List(1, 5, 9), List(1, 6, 10),
-      List(1, 7, 10), List(1, 6, 15), List(1, 7, 15), List(4, 1, 13), List(4, 1, 14), List(4, 2, 13)
+      List(1, 4, 5, r),  List(1, 1, 4, n),  List(1, 6, 9, s),  List(1, 5, 9, r),  List(1, 6, 10, r),
+      List(1, 3, 6, n),  List(3, 0, 9, n),  List(4, 2, 3, s),  List(4, 5, 0, s),  List(4, 4, 3, s),
+      List(4, 0, 2, s),  List(4, 1, 14, r), List(1, 2, 5, n),  List(1, 3, 5, n),  List(1, 5, 5, r),
+      List(1, 0, 4, n),  List(1, 2, 4, n),  List(1, 3, 4, n),  List(1, 4, 4, n),  List(1, 5, 4, n),
+      List(1, 4, 9, n),  List(1, 5, 10, r), List(1, 7, 10, r), List(1, 5, 13, n), List(1, 6, 13, n),
+      List(1, 7, 13, n), List(1, 5, 14, n), List(1, 6, 14, n), List(1, 7, 14, n), List(1, 5, 15, n),
+      List(1, 6, 15, r), List(1, 7, 15, r), List(4, 5, 1, n),  List(4, 2, 2, s),  List(4, 0, 3, s),
+      List(4, 4, 2, s),  List(4, 1, 13, r), List(4, 2, 13, r)
     )
 
   var numberOfDecorations: Int = 0

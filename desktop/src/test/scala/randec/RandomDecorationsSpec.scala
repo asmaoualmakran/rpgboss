@@ -1,8 +1,8 @@
 package randec
 
-import rpgboss.editor.MapViewTools.Pencil
 import rpgboss.editor.randec._
 import rpgboss.editor._
+import rpgboss.editor.dialog.DecorationsDialog
 import rpgboss.model.resource.RpgMap
 
 import scala.collection.mutable.ListBuffer
@@ -12,9 +12,9 @@ class RandomDecorationsSpec extends UnitSpec {
 
   // Initialize game to get valid MapViewState
   RpgDesktop.startup(new Array[String](0))
-  val mainPanel = RpgDesktop.tempPanel
-  val sm = mainPanel.smOpt.get
-  val mapName = "Map000001.rpgmap"
+  val mainPanel: MainPanel = RpgDesktop.tempPanel
+  val sm: StateMaster = mainPanel.smOpt.get
+  val mapName: String = "Map000001.rpgmap"
   val vs = new MapViewState(sm, mapName)
 
 
@@ -107,31 +107,7 @@ class RandomDecorationsSpec extends UnitSpec {
     yge += ranLoc.goodEnough(15, 20)
     yge should not contain (false)
   }
-/*
-  "tileOccupation" should "return the tile occupation of a certain position" in {
 
-    val ranLoc = new RandomLocation(vs)
-
-    /*
-    val pos = ranLoc.getLocation()
-    val x = pos.head
-    val y = pos.tail.head
-     */
-    val x = 5
-    val y = 5
-
-    val dec = new ScaryDecoration
-    val tCodes = dec.getCode(1, 6, 9)
-
-    ranLoc.tileOccupation(x, y) should be(0)
-    println(ranLoc.tileOccupation(x, y))
-    vs.begin()
-    Pencil.onMouseDown(vs, tCodes, MapLayers.Top, x, y)
-    vs.commit()
-    ranLoc.tileOccupation(x, y) should be(1)
-    println(ranLoc.tileOccupation(x, y))
-  }
-*/
 
   ////////////////////////////////
   //// PlaceDecoration
@@ -160,4 +136,20 @@ class RandomDecorationsSpec extends UnitSpec {
     placeDec.placeDecorations(thisMuch)
     placeDec.numberOfDecorations should be (thisMuch)
   }
+/*
+  "DecorationsDialog" should "open succesfully" in {
+    def onOk(nod: Int) ={
+      val ranDec = new PlaceDecoration(vs)
+      ranDec.placeDecorations(nod)
+    }
+
+    val dialog =
+      new DecorationsDialog(
+        mainPanel.topWin,
+        sm,
+        onOk = onOk)
+
+
+    dialog.open()
+  }*/
 }

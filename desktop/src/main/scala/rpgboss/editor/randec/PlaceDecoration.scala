@@ -32,19 +32,15 @@ class PlaceDecoration(vs: MapViewState) extends RandomDecorations(){
       val decoration = getDec()
 
       // Generate correct tile code
-      val int1 = decoration.head
-      val int2 = decoration.tail.head
-      val int3 = decoration.tail.tail.head
+      val int1 = decoration(0)
+      val int2 = decoration(1)
+      val int3 = decoration(2)
 
-      val scary: Boolean = scaryDecorationList.contains(decoration)
-      val nature: Boolean = natureDecorationList.contains(decoration)
-      val resource: Boolean = resourceDecorationList.contains(decoration)
-      val typeList = List(scary, nature, resource)
-
-      val dec = typeList match {
-        case List(true, false, false) => new ScaryDecoration
-        case List(false, true, false) => new NatureDecoration
-        case List(false, false, true) => new ResourceDecoration
+      // Initiate correct decoration type (4th element in list)
+      val dec = decoration(3) match {
+        case 0 => new ScaryDecoration
+        case 1 => new NatureDecoration
+        case 2 => new ResourceDecoration
       }
 
       val tCode = dec.getCode(int1, int2, int3)
