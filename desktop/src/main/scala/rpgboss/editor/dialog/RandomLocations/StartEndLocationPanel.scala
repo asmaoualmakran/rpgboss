@@ -30,22 +30,22 @@ class StartEndLocationPanel (owner: Window,
 
 
   row().grid()
-    .add(new Label("Location Settings"))
+    .add(new Label("Location_Settings"))
 
   row().grid()
-    .add(new Label("Maximum Distance Between Start And End: ")).add(MaxDistance)
+    .add(new Label("Maximum_Distance_Between_Start_And_End")).add(MaxDistance)
   row().grid()
-    .add(new Label("Maximum X Location: ")).add(Maximum_X)
+    .add(new Label("Maximum_X_Location")).add(Maximum_X)
   row().grid()
-    .add(new Label("Maximum Y Location: ")).add(Maximum_Y)
+    .add(new Label("Maximum_Y_Location")).add(Maximum_Y)
 
   row().grid()
     .add(new Label("Seed"))
 
   row().grid()
-    .add(new Label("Give a seed number: ")).add(seed)
+    .add(new Label("Give_a_seed_number")).add(seed)
   row().grid()
-    .add(new Label("Give a maximum events: ")).add(total_events)
+    .add(new Label("Give_a_maximum_events")).add(total_events)
 
 
 }

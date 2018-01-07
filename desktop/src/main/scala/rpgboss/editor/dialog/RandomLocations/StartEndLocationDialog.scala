@@ -28,7 +28,7 @@ class StartEndLocationDialog (owner: Window,
                           sm: StateMaster, onOk: () => Any,
                           onCancel: () => Any
                          )
-  extends StdDialog(owner, getMessageColon("Random_Events")) {
+  extends StdDialog(owner, getMessageColon("Random_Start_Stop_position")) {
 
   centerDialog(new Dimension(500, 400))
 

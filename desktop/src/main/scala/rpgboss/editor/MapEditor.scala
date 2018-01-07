@@ -30,6 +30,8 @@ import javax.swing.ImageIcon
 import rpgboss.editor.dialog.EventInstanceDialog
 import rpgboss.editor.Internationalized._
 import rpgboss.editor.util.MouseUtil
+import rpgboss.editor.dialog.RandomLocations.StartEndLocationDialog
+import rpgboss.editor.startEndLocation.RandomLocation
 
 /**
   * Panel that shows the detailed game map + its toolbar (for zooming, drawing tools, etc.)
@@ -314,6 +316,32 @@ class MapEditor(
     dialog.open()
   }
 
+  /**
+    * Open an RandomLocation dialog
+    * @param vs
+    */
+
+  def showRandomLocation(vs: MapViewState ) = {
+
+
+    def onOk() = {
+
+    }
+
+    def onCancel() = {
+
+    }
+
+
+    val dialog =
+      new StartEndLocationDialog(
+        owner = projectPanel.mainP.topWin,
+        sm = sm, vs = vs,  onOk = onOk, onCancel = onCancel
+      )
+    dialog.open()
+  }
+
+
   def deleteEvent() = viewStateOpt map { vs =>
     selectedEvtId map { id =>
       vs.begin()
@@ -358,6 +386,8 @@ class MapEditor(
   val actionDeleteEvent = Action(getMessage("Delete")) {
     deleteEvent()
   }
+
+
 
   peer
     .getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW)
@@ -426,6 +456,22 @@ class MapEditor(
 
           repaintMapLoc(oldStartingLoc)
           repaintMapLoc(newStartingLoc)
+        })
+
+        contents += new MenuItem(Action(getMessage("Random_Start_Stop_position")){
+          var maxX = 0
+          var maxY = 0
+          var seed = 0
+          var maxdis = 0
+          var TE = 10
+            new RandomLocation(vs= vs,
+              totalEvents = TE,
+              sm = sm,
+              mapname= name,
+              maxDistance= maxdis,
+              maxX= maxX,
+              maxY= maxY,
+              seed= seed)
         })
       }
 
