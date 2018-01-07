@@ -68,8 +68,13 @@ class RandomLocation(
   }
 
   makeLocations(maxX,maxY)
-  var start= new StartLocation(sm, startX, startY, mapname)
+  var start= new StartLocation(sm, vs, startX, startY, mapname)
+  var newstartlocation = start.newStartingLoc
+  var oldstartlocation = start.oldStartingLoc
   var end = new EndLocation(vs, endX, endY, totalEvents)
+  var newendlocationX = end.xloc
+  var newendlocationY = end.yloc
+  var newendlocation = MapLoc(mapname, newendlocationX, newendlocationY)
 
 }
 

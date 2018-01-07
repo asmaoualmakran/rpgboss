@@ -1,15 +1,19 @@
 package rpgboss.editor.startEndLocation
-import rpgboss.editor.StateMaster
+import rpgboss.editor.{MapViewState, StateMaster}
 import rpgboss.editor.misc.GraphicsUtils.TileRect
 import rpgboss.model._
 
 
 class StartLocation(
                      sm: StateMaster,
+                     vs: MapViewState,
                      yTile: Int,
                      xTile: Int,
                      mapname: String
                    ) {
+
+
+
 
 
   val projData = sm.getProjData

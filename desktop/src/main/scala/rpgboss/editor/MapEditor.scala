@@ -323,8 +323,23 @@ class MapEditor(
 
   def showRandomLocation(vs: MapViewState ) = {
 
+    def onOk(givenseed: Int, max_Y: Int, Max_X: Int, maxdis: Int, TE: Int ) = {
 
-    def onOk() = {
+      var newrandomlocation =  new RandomLocation(vs= vs,
+        totalEvents = TE,
+        sm = sm,
+        mapname= name,
+        maxDistance= maxdis,
+        maxX= Max_X,
+        maxY= max_Y,
+        seed= givenseed
+      )
+      def repaintMapLoc(l: MapLoc) =
+        repaintRegion(TileRect(l.x - 0.5f, l.y - 0.5f, 1, 1))
+
+      repaintMapLoc(newrandomlocation.oldstartlocation)
+      repaintMapLoc(newrandomlocation.newstartlocation)
+      repaintMapLoc(newrandomlocation.newendlocation)
 
     }
 
@@ -459,19 +474,7 @@ class MapEditor(
         })
 
         contents += new MenuItem(Action(getMessage("Random_Start_Stop_position")){
-          var maxX = 0
-          var maxY = 0
-          var seed = 0
-          var maxdis = 0
-          var TE = 10
-            new RandomLocation(vs= vs,
-              totalEvents = TE,
-              sm = sm,
-              mapname= name,
-              maxDistance= maxdis,
-              maxX= maxX,
-              maxY= maxY,
-              seed= seed)
+          /* random start stop position dialog opene */
         })
       }
 
