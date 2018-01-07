@@ -61,7 +61,7 @@ class RandomLocation(vs: MapViewState){
       val byte2 = row(xIdx + 1)
       val byte3 = row(xIdx + 2)
 
-     // println(s"byte123: $byte1, $byte2, $byte3")
+      println(s"byte123: $byte1, $byte2, $byte3")
 
       if(byte1 != -1 && byte1 != -2){
         occupied = 1
