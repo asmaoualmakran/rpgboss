@@ -1,7 +1,7 @@
 package randec
 
 import rpgboss.editor.randec._
-import rpgboss.editor._
+import rpgboss.editor.{RandomDecorations => _, _}
 import rpgboss.editor.dialog.DecorationsDialog
 import rpgboss.model.resource.RpgMap
 
@@ -74,7 +74,7 @@ class RandomDecorationsSpec extends UnitSpec {
 
   "RandomLocation" should "be a list of integers with length 2" in {
     val pos = ranLoc.getLocation()
-    pos should have length (2)
+    pos should have length 2
     pos.isInstanceOf[List[Int]] should be(true)
   }
 
@@ -99,13 +99,13 @@ class RandomDecorationsSpec extends UnitSpec {
     nge += ranLoc.goodEnough(-1, 4)
     nge += ranLoc.goodEnough(4, -1)
     nge += ranLoc.goodEnough(9999, 9999)
-    nge should not contain (true)
+    nge should not contain true
 
     var yge = new ListBuffer[Boolean]
     yge += ranLoc.goodEnough(0, 0)
     yge += ranLoc.goodEnough(RpgMap.initXSize - 1, RpgMap.initYSize - 1)
     yge += ranLoc.goodEnough(15, 20)
-    yge should not contain (false)
+    yge should not contain false
   }
 
 

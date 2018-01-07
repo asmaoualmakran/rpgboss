@@ -1,10 +1,10 @@
 package rpgboss.editor.randec
 
 abstract class Decoration {
-  var decorationType: DecorationType = _;
+  var decorationType: DecorationType = _
 
   def getCode(int1: Int, int2: Int, int3: Int): Array[Array[Array[Byte]]] =
-    return Array(Array(Array(int1.asInstanceOf[Byte], int2.asInstanceOf[Byte], int3.asInstanceOf[Byte])))
+    Array(Array(Array(int1.asInstanceOf[Byte], int2.asInstanceOf[Byte], int3.asInstanceOf[Byte])))
 
   def doDisplay(): Unit = decorationType.display()
 }
@@ -16,15 +16,15 @@ trait DecorationType{
 
 object ScaryType extends DecorationType{
   val dType = "Scary"
-  def display() = print(s" [$dType] ")
+  def display(): Unit = print(s" [$dType] ")
 }
 object NatureType extends DecorationType{
   val dType = "Nature"
-  def display() = print(s" [$dType] ")
+  def display(): Unit = print(s" [$dType] ")
 }
 object ResourceType extends DecorationType{
   val dType = "Resource"
-  def display() = print(s" [$dType] ")
+  def display(): Unit = print(s" [$dType] ")
 }
 
 

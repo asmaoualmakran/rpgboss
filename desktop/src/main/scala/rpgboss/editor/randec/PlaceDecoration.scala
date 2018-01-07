@@ -32,7 +32,7 @@ class PlaceDecoration(vs: MapViewState) extends RandomDecorations(){
       val decoration = getDec()
 
       // Generate correct tile code
-      val int1 = decoration(0)
+      val int1 = decoration.head
       val int2 = decoration(1)
       val int3 = decoration(2)
 
