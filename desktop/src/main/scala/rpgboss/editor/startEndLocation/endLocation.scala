@@ -8,6 +8,8 @@ import rpgboss.model.event._
 
 import scala.collection.mutable.ArrayBuffer
 
+
+/* This class will create an end location and save it into the project data */
 class EndLocation(vs: MapViewState, x: Int, y: Int, totalEvents: Int) {
   /*
   Makes an end Location,

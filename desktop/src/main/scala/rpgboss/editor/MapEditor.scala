@@ -474,7 +474,7 @@ class MapEditor(
         })
 
         contents += new MenuItem(Action(getMessage("Random_Start_Stop_position")){
-          /* random start stop position dialog opene */
+          showRandomLocation(vs)
         })
       }
 

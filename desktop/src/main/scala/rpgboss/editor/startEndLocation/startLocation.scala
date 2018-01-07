@@ -4,6 +4,7 @@ import rpgboss.editor.misc.GraphicsUtils.TileRect
 import rpgboss.model._
 
 
+/* This class will create an new starting location and save it into the project data */
 class StartLocation(
                      sm: StateMaster,
                      vs: MapViewState,
@@ -11,10 +12,6 @@ class StartLocation(
                      xTile: Int,
                      mapname: String
                    ) {
-
-
-
-
 
   val projData = sm.getProjData
   val oldStartingLoc = sm.getProjData.startup.startingLoc
@@ -29,3 +26,4 @@ class StartLocation(
 
 
 
+m
