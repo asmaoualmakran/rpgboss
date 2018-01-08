@@ -5,7 +5,7 @@ import rpgboss.model._
 import rpgboss.model.resource._
 import rpgboss.editor.dialog._
 import java.io.File
-import rpgboss.editor.Internationalized._ 
+import rpgboss.editor.Internationalized._
 
 import javax.swing.event._
 import javax.swing.KeyStroke
@@ -30,6 +30,16 @@ class MainPanel(val topWin: Frame)
     topWin
   }
   val window = topWin
+
+  /*
+    Code below needs adjustments -> not what it should do
+   */
+  val actionRandom = Action(getMessage("New_Random_Map")){
+    if (askSaveUnchanged()) {
+      val d = new NewProjectDialog(topWin, p => setProject(p))
+      d.open()
+    }
+  }
 
   val actionNew = Action(getMessage("New_Project")) {
     if (askSaveUnchanged()) {

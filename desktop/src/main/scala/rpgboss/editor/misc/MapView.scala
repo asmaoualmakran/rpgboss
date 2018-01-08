@@ -233,7 +233,6 @@ class MapView(
       new Dimension(0, 0)
     }
 
-    println(canvasPanel.preferredSize)
 
     canvasPanel.revalidate()
     canvasPanel.repaint()

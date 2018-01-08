@@ -35,10 +35,16 @@ import javax.swing.ImageIcon
 
 import rpgboss.editor.dialog.EventInstanceDialog
 import rpgboss.editor.Internationalized._
+<<<<<<< HEAD
 import rpgboss.editor.randec._
+=======
+import rpgboss.editor.map_generator.{MapFiller, MapGenerator}
+>>>>>>> map_generator
 import rpgboss.editor.util.MouseUtil
 import rpgboss.editor.dialog.RandomLocations.StartEndLocationDialog
 import rpgboss.editor.startEndLocation.RandomLocation
+
+import scala.util.Random
 
 /**
   * Panel that shows the detailed game map + its toolbar (for zooming, drawing tools, etc.)
@@ -527,6 +533,8 @@ class MapEditor(
     yTile0: Float,
     vs: MapViewState): Option[(Boolean, MouseFunction, MouseFunction)] = {
 
+
+
     if (!vs.mapMeta.withinBounds(xTile0, yTile0))
       return None
 
@@ -631,8 +639,15 @@ class MapEditor(
           .getOrElse(newEvent(eventInstance = false))
       }
   }
+
+  def random() = {
+    val containers = new MapGenerator(3,5, RpgMap.initYSize, RpgMap.initXSize)
+    val fill = new MapFiller(this.viewStateOpt.get, containers)
+  }
 }
 
 object MapEditor {
   lazy val startingLocIcon = rpgboss.lib.Utils.readClasspathImage("player_play.png")
 }
+
+

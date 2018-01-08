@@ -143,4 +143,7 @@ object RpgMap extends MetaResource[RpgMap, RpgMapMetadata] {
   }
 
   def defaultMapData() = emptyMapData(initXSize, initYSize)
+
+  // create function radom map
+
 }

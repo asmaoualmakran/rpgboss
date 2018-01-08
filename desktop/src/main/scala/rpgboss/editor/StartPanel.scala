@@ -28,6 +28,7 @@ class StartPanel(val mainP: MainPanel)
 	contents += new Button(mainP.actionNew)
     contents += Swing.HStrut(32)
 	contents += new Button(mainP.actionOpen)
+  contents += new Button(mainP.actionRandom)
   }
 }
 

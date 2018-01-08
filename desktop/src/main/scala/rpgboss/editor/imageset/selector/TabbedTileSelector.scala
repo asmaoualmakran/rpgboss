@@ -43,7 +43,6 @@ class TabbedTileSelector(sm: StateMaster)
           val tileset = sm.assetCache.getTileset(tsName)
           val tabComponent =
             new TilesetTileSelector(i.toByte, tileset, selectedTileCodes = _)
-
           pages += new TabbedPane.Page("T%d".format(i), tabComponent)
       })
 
