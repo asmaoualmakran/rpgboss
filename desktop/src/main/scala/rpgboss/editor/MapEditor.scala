@@ -10,26 +10,34 @@ import rpgboss.editor.uibase._
 import rpgboss.editor.misc._
 import rpgboss.editor.misc.GraphicsUtils._
 import com.typesafe.scalalogging.slf4j.LazyLogging
+
 import scala.math._
 import scala.swing._
 import scala.swing.event._
 import javax.imageio._
-import java.awt.{ BasicStroke, AlphaComposite, Color }
+import java.awt.{AlphaComposite, BasicStroke, Color}
 import java.awt.geom.Line2D
 import java.awt.event.MouseEvent
+
 import rpgboss.model.event.RpgEvent
 import rpgboss.editor.dialog.EventDialog
 import java.awt.image.BufferedImage
+
 import scala.collection.mutable.Buffer
 import javax.swing.event._
 import javax.swing.KeyStroke
 import java.awt.event.KeyEvent
 import java.awt.event.InputEvent
+
 import rpgboss.editor.imageset.selector.TabbedTileSelector
 import javax.swing.ImageIcon
+
 import rpgboss.editor.dialog.EventInstanceDialog
 import rpgboss.editor.Internationalized._
+import rpgboss.editor.map_generator.{MapFiller, MapGenerator}
 import rpgboss.editor.util.MouseUtil
+
+import scala.util.Random
 
 /**
   * Panel that shows the detailed game map + its toolbar (for zooming, drawing tools, etc.)
@@ -450,6 +458,8 @@ class MapEditor(
     yTile0: Float,
     vs: MapViewState): Option[(Boolean, MouseFunction, MouseFunction)] = {
 
+    println(e, vs)
+
     if (!vs.mapMeta.withinBounds(xTile0, yTile0))
       return None
 
@@ -503,6 +513,7 @@ class MapEditor(
         setTilePaintSq(tool.selectionSqOnDrag, xTile0, yTile0)
         val changedRegion =
           tool.onMouseDown(vs, tCodes, selectedLayer, xTile0.toInt, yTile0.toInt)
+        println(tCodes.head.head.head.toString)
         repaintRegion(changedRegion)
 
         def onDrag(xTile1: Float, yTile1: Float, vs: MapViewState) = {
@@ -552,8 +563,16 @@ class MapEditor(
           .getOrElse(newEvent(eventInstance = false))
       }
   }
+
+  def random() = {
+    println("viewstate?", this.viewStateOpt)
+    val containers = new MapGenerator(3,5, RpgMap.initYSize, RpgMap.initXSize)
+    val fill = new MapFiller(this.viewStateOpt.get, containers)
+  }
 }
 
 object MapEditor {
   lazy val startingLocIcon = rpgboss.lib.Utils.readClasspathImage("player_play.png")
 }
+
+

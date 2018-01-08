@@ -5,7 +5,7 @@ import rpgboss.model._
 import rpgboss.model.resource._
 import rpgboss.editor.dialog._
 import java.io.File
-import rpgboss.editor.Internationalized._ 
+import rpgboss.editor.Internationalized._
 
 import javax.swing.event._
 import javax.swing.KeyStroke

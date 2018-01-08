@@ -80,26 +80,26 @@ class ContainerGenerator(startContainer: Container, seed:Int, minimumSize: Int) 
 
     if (largeEnough_?(container)) {
 
-      if (random.nextInt(1) == 0) { // if the direction is 0 -> split the container horizontally
-        val middle = container.height/2
-        val c1 = new Container(container.leftBound, container.rightBound, container.upperBound, middle)
-        val c2 = new Container(container.leftBound, container.rightBound, middle, container.lowerBound)
+      if (random.nextInt(2) == 0) { // if the direction is 0 -> split the container horizontally
+        val middle = container.lowerBound/2
+        val c1 = new Container(container.leftBound, container.rightBound, container.upperBound,middle)
+        val c2 = new Container(container.leftBound, container.rightBound,  middle, container.lowerBound)
 
-        if(c1.width/c1.height < W_RATIO || c2.width/c2.height < W_RATIO){  // these ratio's are used to make sure the containers are of a decent shape
+     /*   if(c1.width/c1.height < W_RATIO || c2.width/c2.height < W_RATIO){  // these ratio's are used to make sure the containers are of a decent shape
           return splitContainer(container)                 // if they are too small, start over
-        }
+        }*/
         return (c1, c2)
 
 
 
       } else{ // otherwise split it vertically
-        val middle = container.width / 2
+        val middle = container.rightBound / 2
         val c1 = new Container(container.leftBound, middle, container.upperBound, container.lowerBound)
         val c2 = new Container(middle, container.rightBound, container.upperBound, container.lowerBound)
 
-        if(c1.height/c1.width < H_RATIO || c2.height/c2.width < H_RATIO){
+      /*  if(c1.height/c1.width < H_RATIO || c2.height/c2.width < H_RATIO){
           return splitContainer(container)
-        }
+        }*/
         return (c1,c2)
       }
     }

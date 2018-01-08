@@ -191,6 +191,7 @@ class ProjectPanel(val mainP: MainPanel, sm: StateMaster)
     }
   }
 
+  //add element
   val sidePane =
     new SplitPane(Orientation.Horizontal, tileSelector, mapSelector) {
       resizeWeight = 1.0
@@ -221,6 +222,10 @@ class ProjectPanel(val mainP: MainPanel, sm: StateMaster)
     mapSelector.highlightWithoutEvent(node)
   }
 
+  mapView.random()
+
   mainP.revalidate()
+
+
 }
 
