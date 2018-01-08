@@ -458,7 +458,7 @@ class MapEditor(
     yTile0: Float,
     vs: MapViewState): Option[(Boolean, MouseFunction, MouseFunction)] = {
 
-    println(e, vs)
+
 
     if (!vs.mapMeta.withinBounds(xTile0, yTile0))
       return None
@@ -513,7 +513,6 @@ class MapEditor(
         setTilePaintSq(tool.selectionSqOnDrag, xTile0, yTile0)
         val changedRegion =
           tool.onMouseDown(vs, tCodes, selectedLayer, xTile0.toInt, yTile0.toInt)
-        println(tCodes.head.head.head.toString)
         repaintRegion(changedRegion)
 
         def onDrag(xTile1: Float, yTile1: Float, vs: MapViewState) = {
@@ -565,7 +564,6 @@ class MapEditor(
   }
 
   def random() = {
-    println("viewstate?", this.viewStateOpt)
     val containers = new MapGenerator(3,5, RpgMap.initYSize, RpgMap.initXSize)
     val fill = new MapFiller(this.viewStateOpt.get, containers)
   }

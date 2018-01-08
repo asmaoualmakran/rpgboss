@@ -233,7 +233,6 @@ class MapView(
       new Dimension(0, 0)
     }
 
-    println(canvasPanel.preferredSize)
 
     canvasPanel.revalidate()
     canvasPanel.repaint()
@@ -242,7 +241,6 @@ class MapView(
   }
 
   def selectMap(mapOpt: Option[RpgMap]) = {
-    println("map selected woop woop")
     viewStateOpt = mapOpt map { mapMeta =>
       new MapViewState(sm, mapMeta.name)
     }
