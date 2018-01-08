@@ -35,11 +35,8 @@ import javax.swing.ImageIcon
 
 import rpgboss.editor.dialog.EventInstanceDialog
 import rpgboss.editor.Internationalized._
-<<<<<<< HEAD
 import rpgboss.editor.randec._
-=======
 import rpgboss.editor.map_generator.{MapFiller, MapGenerator}
->>>>>>> map_generator
 import rpgboss.editor.util.MouseUtil
 import rpgboss.editor.dialog.RandomLocations.StartEndLocationDialog
 import rpgboss.editor.startEndLocation.RandomLocation
